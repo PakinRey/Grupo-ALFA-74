@@ -3667,7 +3667,7 @@ export const withConversionTracking = (WrappedComponent) => {
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from 'react-helmet-next';
 import App from './App.jsx';
 import './assets/scss/main.scss'
 
@@ -3697,7 +3697,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 // src/pages/ContactPage.jsx
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 import { motion } from 'framer-motion';
 import styles from './ContactPage.module.scss';
 import { Link } from 'react-router-dom';
@@ -3888,7 +3888,7 @@ export default ContactPage;
 ```
 // src/pages/EspectacularesPage.jsx
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 
 // --- Importar los nuevos componentes especializados ---
 import { EspectacularesHeader } from '../components/espectaculares/EspectacularesHeader.jsx';
@@ -3944,7 +3944,7 @@ export default EspectacularesPage;
 ```
 // src/pages/HomePage.jsx
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 import { HeroSection } from '../components/home/HeroSection.jsx';
 import { TrustBar } from '../components/home/TrustBar.jsx';
 import { ServicesOverview } from '../components/home/ServicesOverview.jsx';

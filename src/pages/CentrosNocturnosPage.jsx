@@ -1,6 +1,6 @@
 // src/pages/CentrosNocturnosPage.jsx
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 
 // --- Importar los nuevos componentes especializados ---
 import { NocturnosHeader } from '../components/nocturnos/NocturnosHeader.jsx';

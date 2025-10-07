@@ -1,6 +1,6 @@
 // src/pages/HomePage.jsx
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 import { HeroSection } from '../components/home/HeroSection.jsx';
 import { TrustBar } from '../components/home/TrustBar.jsx';
 import { ServicesOverview } from '../components/home/ServicesOverview.jsx';

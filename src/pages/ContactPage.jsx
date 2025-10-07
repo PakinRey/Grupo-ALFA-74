@@ -1,6 +1,6 @@
 // src/pages/ContactPage.jsx
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-next';
 import { motion } from 'framer-motion';
 import styles from './ContactPage.module.scss';
 import { Link } from 'react-router-dom';
