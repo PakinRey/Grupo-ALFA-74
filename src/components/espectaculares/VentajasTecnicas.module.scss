@@ -1,5 +1,5 @@
 // src/components/espectaculares/VentajasTecnicas.module.scss
-@import '../../assets/scss/variables.scss';
+@use '/src/assets/scss/variables' as *;
 
 .ventajasSection {
     padding: 6rem 0;

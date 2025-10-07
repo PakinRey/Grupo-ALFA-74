@@ -1274,7 +1274,7 @@ export function ScrollToTop() {
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ContactFormBlock.module.scss';
-import { useConversion } from '/src/hooks/useConversion.js'; // Asegúrate de que esta ruta sea correcta
+import { useConversion } from '/src/hooks/useConversion.js';
 
 // --- Iconos SVG ---
 const PaperPlaneIcon = () => (
@@ -1466,7 +1466,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaFileSignature, FaUserTie, FaChartLine } from 'react-icons/fa';
 import styles from './CorporativosCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
 
 const benefits = [
   { icon: <FaUserTie />, text: 'Asesoría directa con un líder de proyecto.' },

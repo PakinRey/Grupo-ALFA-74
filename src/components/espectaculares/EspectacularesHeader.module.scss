@@ -1,7 +1,7 @@
 // src/components/espectaculares/EspectacularesHeader.module.scss
 
 // --- Importar variables globales si las tienes ---
-// @import '../../assets/scss/variables.scss';
+@use '/src/assets/scss/variables' as *;
 
 .espectacularesHeader {
     position: relative;

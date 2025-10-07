@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaUserTie, FaFileSignature, FaRocket } from 'react-icons/fa';
 import styles from './NocturnosCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+import ContactFormBlock from '/src/components/contact/ContactFormBlock.jsx';
 
 const benefits = [
   { icon: <FaUserTie />, text: 'Asesoría con un experto en tu proyecto.' },

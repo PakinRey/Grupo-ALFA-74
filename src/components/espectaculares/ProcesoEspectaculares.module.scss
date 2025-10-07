@@ -1,5 +1,5 @@
 // src/components/espectaculares/ProcesoEspectaculares.module.scss
-@import '../../assets/scss/variables.scss'; // Asegúrate de que esta ruta sea correcta
+@use '/src/assets/scss/variables' as *;
 
 .workProcessSection {
     padding: 6rem 0;

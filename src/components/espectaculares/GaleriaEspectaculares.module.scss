@@ -1,5 +1,5 @@
 // src/components/espectaculares/GaleriaEspectaculares.module.scss
-@import '../../assets/scss/variables.scss';
+@use '/src/assets/scss/variables' as *;
 
 .gallerySection {
     padding: 6rem 0;
