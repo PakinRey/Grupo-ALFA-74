@@ -1,7 +1,7 @@
 // src/components/naves/CTAConsultation.jsx
 import React from 'react';
 import styles from './CTAConsultation.module.scss';
-import ContactFormBlock from '../contact/contactFormBlock.jsx';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
 
 export const CTAConsultation = () => {
   return (
