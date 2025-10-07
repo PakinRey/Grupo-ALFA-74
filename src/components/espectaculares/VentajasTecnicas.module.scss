@@ -1,0 +1,88 @@
+// src/components/espectaculares/VentajasTecnicas.module.scss
+@import '../../assets/scss/variables.scss';
+
+.ventajasSection {
+    padding: 6rem 0;
+}
+
+.ventajasGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 4rem;
+
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.textColumn {
+    @media (max-width: 992px) {
+        order: 2;
+    }
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: $color-text-secondary;
+    margin-bottom: 3rem;
+}
+
+.advantagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.advantageItem {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.iconWrapper {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    color: $color-primary;
+    background-color: $color-primary-light;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.itemContent {
+    h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        color: $color-text-secondary;
+        line-height: 1.6;
+    }
+}
+
+.imageColumn {
+    img {
+        width: 100%;
+        height: 100%;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: $shadow-xl;
+    }
+    @media (max-width: 992px) {
+        order: 1;
+        margin-bottom: 3rem;
+    }
+}

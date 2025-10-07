@@ -1,0 +1,112 @@
+// src/components/common/Navbar/NavDropdown.module.scss
+@use '../../../assets/scss/variables' as *;
+
+.navItem {
+  position: relative; // Crucial para el posicionamiento del dropdown
+
+  // En móvil, los items ocupan todo el ancho
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}
+
+.navLinkItem {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // Para separar texto y flecha en móvil
+  gap: 0.5rem;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width $transition-speed ease;
+  }
+
+  &:hover::after, &.activeLink::after {
+    width: 100%;
+  }
+}
+
+.chevronIcon {
+  font-size: 0.7rem;
+  transition: transform $transition-speed ease;
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+// --- Estilos del Menú Dropdown ---
+.dropdownMenu {
+  // Estilos base para ambos (móvil y desktop)
+  overflow: hidden;
+
+  // --- ESTILOS DESKTOP ---
+  @media (min-width: calc(#{$breakpoint-md} + 1px)) {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: $border-radius;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    width: 320px;
+    margin-top: 0.75rem;
+    z-index: 1010;
+  }
+
+  // --- ESTILOS MÓVIL ---
+  @media (max-width: $breakpoint-md) {
+    position: static; // Se muestra en el flujo normal del documento
+    width: 100%;
+    padding-left: 1.5rem; // Indentación para mostrar jerarquía
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+.dropdownItem {
+  display: block;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: calc(#{$border-radius} - 2px);
+  transition: background-color $transition-speed ease;
+  
+  &:hover {
+    background-color: var(--bg-primary);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0.75rem 0;
+  }
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemLabel {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.itemDescription {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: normal;
+}

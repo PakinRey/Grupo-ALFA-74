@@ -1,0 +1,60 @@
+// src/components/naves/GaleriaNaves.module.scss
+@use '../../assets/scss/variables' as var;
+
+.section {
+  padding: 6rem 0;
+  background: var.$color-background-light;
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  border-radius: var.$border-radius;
+  overflow: hidden;
+  box-shadow: var.$shadow-md;
+  aspect-ratio: 4 / 3; // Proporción fija para todas las tarjetas
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: var.$shadow-xl;
+    
+    .caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: var.$color-text-light;
+  padding: 2rem 1.5rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transform: translateY(20%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}

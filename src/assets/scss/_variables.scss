@@ -1,0 +1,48 @@
+// src/assets/scss/_variables.scss
+
+// ----------------------------------------
+// Paleta de Colores de la Marca
+// ----------------------------------------
+$brand-green-bright: #9CCC3C;
+$brand-green-medium: #6EB43F;
+$brand-green-dark: #3A7D44;
+$brand-white: #FFFFFF;
+$brand-gray-dark: #1a202c;    // Casi negro
+$brand-gray-medium: #e2e8f0; // Bordes
+$brand-gray-light: #f7fafc;   // Fondo claro
+$brand-text-muted: #a0aec0;   // Texto gris claro
+
+// ----------------------------------------
+// Variables Semánticas (El "cerebro" del tema)
+// Usamos estas en los componentes para poder cambiar el tema fácilmente.
+// ----------------------------------------
+$color-primary: $brand-green-bright;
+$color-primary-dark: $brand-green-dark;
+$color-primary-light: #f0fdf4; // Verde muy pálido para fondos de íconos
+
+$color-text-primary: $brand-gray-dark;
+$color-text-secondary: #4b5563; // Un gris intermedio para párrafos
+$color-text-on-accent: $brand-gray-dark;
+$color-text-light: $brand-white;
+$color-text-muted-dark: $brand-text-muted;
+
+$color-background-light: $brand-gray-light;
+$color-background-dark: $brand-gray-dark;
+$color-background-white: $brand-white;
+
+$color-border: $brand-gray-medium;
+
+// ----------------------------------------
+// Layout y UI
+// ----------------------------------------
+$border-radius: 8px;
+$transition-speed: 0.3s;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
+// ----------------------------------------
+// Sombras
+// ----------------------------------------
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);

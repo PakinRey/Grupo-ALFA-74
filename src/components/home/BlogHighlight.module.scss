@@ -1,0 +1,125 @@
+// src/components/home/BlogHighlight.module.scss
+
+@use '../../assets/scss/variables' as *;
+
+.blogSection {
+    padding: 6rem 0;
+    background-color: $brand-white; // Fondo blanco para contrastar
+}
+
+.sectionTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $brand-gray-dark;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: lighten($brand-gray-dark, 40%);
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.postsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background-color: $brand-white;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid $brand-gray-medium;
+    overflow: hidden;
+    transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+
+        .cardCta {
+            color: $brand-green-bright; // CTA más brillante en hover
+        }
+    }
+}
+
+.cardImage {
+    img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+}
+
+.cardContent {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; // Asegura que el contenido llene el espacio
+}
+
+.cardCategory {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $brand-green-dark;
+    margin-bottom: 0.75rem;
+}
+
+.cardTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $brand-gray-dark;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    // Evita que el título se estire demasiado
+    flex-grow: 1; 
+}
+
+.cardExcerpt {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: lighten($brand-gray-dark, 30%);
+    margin-bottom: 1.5rem;
+}
+
+.cardCta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: $brand-green-medium;
+    margin-top: auto; // Empuja el CTA al final de la tarjeta
+    transition: color $transition-speed ease;
+
+    svg {
+        transition: transform $transition-speed ease;
+    }
+
+    &:hover svg {
+        transform: translateX(4px);
+    }
+}
+
+
+// --- Media Queries ---
+@media (max-width: $breakpoint-md) {
+    .blogSection {
+        padding: 4rem 0;
+    }
+    .sectionTitle {
+        font-size: 2rem;
+    }
+    .postsGrid {
+        grid-template-columns: 1fr; // Una sola columna en móvil
+        gap: 2rem;
+    }
+}

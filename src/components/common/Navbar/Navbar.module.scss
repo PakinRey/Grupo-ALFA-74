@@ -1,0 +1,125 @@
+// src/components/common/Navbar/Navbar.module.scss
+@use '../../../assets/scss/variables' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent;
+  padding: 1rem 0;
+  transition: background-color $transition-speed ease, box-shadow $transition-speed ease, padding $transition-speed ease;
+  
+  &.scrolled {
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow);
+    padding: 0.75rem 0;
+  }
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 48px;
+  width: auto;
+  transition: transform $transition-speed ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.navLinks {
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow);
+    padding: 6rem 2rem 2rem;
+    transition: right 0.4s ease-in-out;
+    
+    &.menuOpen {
+      right: 0;
+    }
+
+    ul {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      width: 100%; // Asegura que los li ocupen todo el ancho
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaButton {
+  background-color: var(--color-accent);
+  color: var(--text-on-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: $border-radius;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform $transition-speed ease, background-color $transition-speed ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    background-color: var(--color-accent-dark);
+  }
+}
+
+.mobileCta {
+  display: none;
+  @media (max-width: $breakpoint-md) {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
+
+.desktopCta {
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  
+  .icon {
+    width: 28px;
+    height: 28px;
+    stroke: var(--text-primary);
+    stroke-width: 2;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    display: block;
+  }
+}

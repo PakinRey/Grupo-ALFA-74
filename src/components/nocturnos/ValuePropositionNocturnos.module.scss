@@ -1,0 +1,59 @@
+// src/components/nocturnos/ValuePropositionNocturnos.module.scss
+@use '../../assets/scss/variables' as var;
+
+.section {
+  padding: 6rem 0;
+  background: var.$color-background-light;
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  max-width: 30ch;
+  margin: 0 auto 4rem;
+  line-height: 1.3;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: var.$breakpoint-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: var.$color-background-white;
+  border: 1px solid var.$color-border;
+  border-radius: var.$border-radius;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: var.$shadow-md;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: var.$shadow-lg;
+  }
+}
+
+.cardIcon {
+  font-size: 3rem;
+  color: var.$color-primary;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.cardText {
+  color: var.$color-text-secondary;
+  line-height: 1.7;
+}

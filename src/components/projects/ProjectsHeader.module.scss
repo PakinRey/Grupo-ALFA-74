@@ -1,0 +1,55 @@
+// src/components/projects/ProjectsHeader.module.scss
+
+@use '../../assets/scss/variables' as *;
+
+.projectsHeader {
+  padding: 8rem 0; // Aumentamos el padding para que el video se vea mejor
+  position: relative; // Necesario para posicionar el video y el overlay
+  overflow: hidden; // Oculta cualquier parte del video que se desborde
+  text-align: center;
+}
+
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 25, 41, 0.6); // Overlay oscuro semitransparente
+  z-index: 1; // Se coloca entre el video y el texto
+}
+
+.backgroundVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Cubre todo el espacio sin deformarse
+  transform: translate(-50%, -50%);
+  z-index: 0; // Se coloca en el fondo
+}
+
+.headerContainer {
+  position: relative; // Necesario para que el texto se coloque sobre el overlay
+  z-index: 2; // El z-index más alto para que el texto esté al frente
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: #FFFFFF; // Cambiamos el color del texto a blanco para que contraste
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.intro {
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  // color: var(--text-light);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}

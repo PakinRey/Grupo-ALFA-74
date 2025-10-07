@@ -1,0 +1,87 @@
+@use '../../assets/scss/variables' as *;
+
+.testimonialsSection {
+  padding: 5rem 0;
+  background-color: var(--bg-secondary);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3.5rem;
+}
+
+.carouselContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonialCard {
+  text-align: center;
+  padding: 2rem;
+  display: flex !important; // Important to override slick styles
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.authorImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border-color);
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.authorTitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+
+// --- Estilos Globales para personalizar el carrusel ---
+// Usamos :global() para que SCSS Modules no modifique estos selectores
+:global(.slick-dots li button:before) {
+  font-size: 12px;
+  color: var(--border-color);
+  opacity: 1;
+  transition: color $transition-speed ease;
+}
+
+:global(.slick-dots li.slick-active button:before) {
+  color: var(--color-accent) !important;
+}
+
+:global(.slick-dots li button:hover:before) {
+  color: var(--color-accent-dark);
+}

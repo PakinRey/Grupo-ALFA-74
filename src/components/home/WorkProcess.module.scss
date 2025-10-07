@@ -1,0 +1,184 @@
+// src/components/home/WorkProcess.module.scss
+@use 'sass:color';
+@use '../../assets/scss/variables' as *;
+
+.workProcessSection {
+    padding: 6rem 0;
+    background-color: $brand-gray-light;
+}
+
+.sectionTitle, .subtitle {
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $brand-gray-dark;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: lighten($brand-gray-dark, 40%);
+    margin-bottom: 4rem;
+}
+
+.processLayout {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr; // Ratio para las columnas
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+// --- Columna Izquierda: Navegador ---
+.stepNavigator {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 120px;
+}
+
+.stepButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    background-color: transparent;
+    border: 1px solid $brand-gray-medium;
+    border-radius: $border-radius;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    transition: background-color $transition-speed ease;
+
+    &:hover:not(.active) {
+        background-color: $brand-white;
+    }
+}
+
+.activeBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $brand-white;
+    border-radius: $border-radius;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    z-index: 1;
+}
+
+.stepNumber, .stepTitleNav {
+    position: relative;
+    z-index: 2;
+    transition: color $transition-speed ease;
+}
+
+.stepNumber {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $brand-green-dark;
+}
+
+.stepTitleNav {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: lighten($brand-gray-dark, 20%);
+}
+
+.stepButton.active {
+    border-color: transparent;
+    .stepTitleNav {
+        color: $brand-gray-dark;
+    }
+}
+
+// --- Columna Derecha: Contenido ---
+.contentPanel {
+    background-color: $brand-white;
+    border-radius: $border-radius;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    padding: 2.5rem;
+    border: 1px solid $brand-gray-medium;
+}
+
+.contentHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background-color: lighten($brand-green-bright, 35%);
+    color: $brand-green-dark;
+    border-radius: 50%;
+    
+    svg {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.stepTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $brand-gray-dark;
+}
+
+.stepDescription {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: lighten($brand-gray-dark, 30%);
+    margin-bottom: 2rem;
+}
+
+.imageWrapper {
+    img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: $border-radius;
+    }
+}
+
+
+// --- Media Queries para responsividad ---
+@media (max-width: $breakpoint-lg) {
+    .processLayout {
+        grid-template-columns: 1fr;
+    }
+    .stepNavigator {
+        position: static;
+        flex-direction: row; // Los botones se ponen en horizontal
+        overflow-x: auto;   // Y se pueden scrollear
+        padding-bottom: 1rem;
+    }
+    .stepButton {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: $breakpoint-md) {
+    .sectionTitle {
+        font-size: 2rem;
+    }
+    .contentPanel {
+        padding: 1.5rem;
+    }
+    .stepTitle {
+        font-size: 1.5rem;
+    }
+}

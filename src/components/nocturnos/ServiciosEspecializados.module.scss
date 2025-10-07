@@ -1,0 +1,54 @@
+// src/components/nocturnos/ServiciosEspecializados.module.scss
+@use '../../assets/scss/variables' as var;
+
+.section {
+    padding: 6rem 0;
+    background-color: var.$color-background-white;
+}
+
+.title {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 4rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background: transparent;
+    border: 1px solid var.$color-border;
+    border-radius: var.$border-radius;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+        background-color: var.$color-primary-light;
+        border-color: var.$color-primary;
+    }
+}
+
+.cardIcon {
+    font-size: 2.5rem;
+    color: var.$color-primary-dark;
+    margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.cardText {
+    color: var.$color-text-secondary;
+    line-height: 1.6;
+}

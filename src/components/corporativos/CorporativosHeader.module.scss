@@ -1,0 +1,91 @@
+// src/components/corporativos/CorporativosHeader.module.scss
+@use '../../assets/scss/variables' as var;
+
+.header {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  color: var.$color-text-light;
+  background-color: var.$color-background-dark;
+  text-align: center;
+
+  @media (min-width: var.$breakpoint-lg) {
+    min-height: 75vh;
+    text-align: left;
+  }
+}
+
+.mediaWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(26, 32, 44, 0.9) 20%, rgba(26, 32, 44, 0.3) 100%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 0;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  color: var.$color-text-light;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+  margin: 0 auto 1.5rem;
+
+  @media (min-width: var.$breakpoint-lg) {
+    margin: 0 0 1.5rem;
+  }
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  max-width: 55ch;
+  line-height: 1.7;
+  color: var.$color-text-muted-dark;
+  margin: 0 auto 2.5rem;
+  
+  strong {
+    color: var.$color-primary;
+  }
+
+  @media (min-width: var.$breakpoint-lg) {
+    margin: 0 0 2.5rem;
+  }
+}
+
+.cta {
+  display: inline-flex;
+  padding: 1.1rem 3rem;
+  border-radius: var.$border-radius;
+  background: var.$color-primary;
+  color: var.$color-text-on-accent;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: var.$shadow-lg;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var.$shadow-xl;
+  }
+}

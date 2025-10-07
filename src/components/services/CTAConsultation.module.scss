@@ -1,0 +1,193 @@
+@use '../../assets/scss/variables' as *;
+
+.ctaSection {
+    padding: 6rem 0;
+    background-color: var(--bg-primary);
+}
+
+.ctaGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (min-width: 992px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+// --- Columna Izquierda: Oferta de Valor ---
+.valueOffer {
+    text-align: center;
+    @media (min-width: 992px) {
+        text-align: left;
+    }
+}
+
+.offerTitle {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.offerText {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    
+    strong {
+        color: var(--color-accent-dark);
+    }
+}
+
+.ctaButton {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--text-on-accent);
+    padding: 1.1rem 3rem;
+    border-radius: $border-radius;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all $transition-speed ease;
+
+    &:hover {
+        background-color: var(--color-accent-dark);
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: var(--shadow);
+    }
+}
+
+// --- Columna Derecha: Formulario ---
+.formColumn {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem;
+    border-radius: $border-radius;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    min-height: 450px; // Evita saltos de layout al mostrar el mensaje de éxito
+
+    h4 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+}
+
+.consultationForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.inputGroup {
+    position: relative;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: $border-radius;
+    transition: border-color $transition-speed ease;
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+    }
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.inputError {
+    border-color: #e53e3e; // Color de error
+}
+
+.errorMessage {
+    color: #e53e3e;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.submitButton {
+    background-color: var(--color-accent-dark);
+    color: var(--text-on-accent);
+    padding: 1rem;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color $transition-speed ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+
+    &:hover:not(:disabled) {
+        background-color: #315b37; // Un verde más oscuro
+    }
+
+    &:disabled {
+        background-color: var(--text-secondary);
+        cursor: not-allowed;
+    }
+}
+
+// --- Estados del Formulario ---
+.spinner {
+    animation: spin 1s linear infinite;
+    width: 24px;
+    height: 24px;
+    circle {
+        stroke: var(--bg-primary);
+        stroke-linecap: round;
+        animation: dash 1.5s ease-in-out infinite;
+    }
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes dash {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+.successMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    min-height: 400px;
+
+    .successIcon {
+        width: 80px;
+        height: 80px;
+        color: var(--color-accent);
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: var(--text-secondary);
+        max-width: 350px;
+    }
+}

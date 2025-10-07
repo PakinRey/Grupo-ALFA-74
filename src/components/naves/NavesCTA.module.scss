@@ -1,0 +1,64 @@
+// src/components/naves/NavesCTA.module.scss
+@use '../../assets/scss/variables' as var;
+
+.ctaSection {
+  padding: 6rem 0;
+  background-color: var.$color-background-dark;
+  color: var.$color-text-light;
+  overflow: hidden; // Previene desbordamientos de las animaciones
+}
+
+.ctaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (min-width: var.$breakpoint-lg) {
+    grid-template-columns: 1fr 1.1fr; // El formulario es un poco más ancho
+  }
+}
+
+.valueColumn {
+  h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var.$color-text-muted-dark;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+}
+
+.benefitIcon {
+  flex-shrink: 0;
+  color: var.$color-primary;
+  font-size: 1.5rem;
+}
+
+// La columna del formulario simplemente necesita un contenedor
+.formColumn {
+  // El estilo principal viene del componente ContactFormBlock
+  // pero podemos añadir un override si es necesario.
+}

@@ -1,0 +1,81 @@
+// src/components/nocturnos/NocturnosHeader.module.scss
+@use '../../assets/scss/variables' as var;
+
+.header {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var.$color-text-light;
+  background-color: var.$color-background-dark;
+  text-align: center;
+  padding: 4rem 0;
+
+  @media (min-width: var.$breakpoint-lg) {
+    min-height: 75vh;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+.mediaWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(18, 24, 39, 0.5) 0%, rgba(18, 24, 39, 0.9) 100%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
+  color: var.$color-text-light;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  max-width: 55ch;
+  line-height: 1.7;
+  color: var.$color-text-muted-dark;
+  margin-bottom: 2.5rem;
+}
+
+.cta {
+  display: inline-flex;
+  padding: 1.1rem 3rem;
+  border-radius: var.$border-radius;
+  background: var.$color-primary;
+  color: var.$color-text-on-accent;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 5px 20px rgba(var.$color-primary, 0.2);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(var.$color-primary, 0.3);
+  }
+}

@@ -1,0 +1,75 @@
+// src/components/espectaculares/EspectacularesHeader.module.scss
+
+// --- Importar variables globales si las tienes ---
+// @import '../../assets/scss/variables.scss';
+
+.espectacularesHeader {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 24, 39, 0.7); // Overlay oscuro
+    z-index: 1;
+}
+
+.backgroundVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    object-fit: cover;
+}
+
+.headerContainer {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.intro {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ctaButton {
+    display: inline-block;
+    background-color: #9CCC3C; // Usando tu color de marca
+    color: #1a202c;
+    font-weight: 700;
+    padding: 0.8rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s ease-out, background-color 0.2s;
+    
+    &:hover {
+        transform: scale(1.05);
+        background-color: #8db635;
+    }
+}

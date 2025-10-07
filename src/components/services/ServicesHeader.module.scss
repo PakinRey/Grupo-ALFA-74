@@ -1,0 +1,94 @@
+@use '../../assets/scss/variables' as *;
+
+.servicesHeader {
+  padding: 6rem 0;
+  position: relative;
+  background-image: url('http://alfa74.com.mx/wp-content/uploads/2016/01/iberespacio.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+}
+
+.headerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(10, 25, 41, 0.9) 0%, rgba(10, 25, 41, 0.6) 100%);
+  z-index: 1;
+}
+
+.headerGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 3rem;
+
+  @media (min-width: $breakpoint-lg) {
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.mainContent {
+  text-align: left;
+}
+
+.title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.intro {
+  font-size: 1.15rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.trustSignals {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.signalItem {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 1.5rem;
+  
+  p {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-accent);
+  }
+}

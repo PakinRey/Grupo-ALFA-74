@@ -1,0 +1,78 @@
+// src/components/home/ClientLogoBar.module.scss
+
+// --- ¡Importando tus variables globales como solicitaste! ---
+@use '../../assets/scss/variables' as *;
+
+.clientLogoSection {
+    padding: 5rem 0;
+    background-color: $brand-gray-light; // Usando tu variable de color de fondo
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+}
+
+.headerIcon {
+    font-size: 2.5rem;
+    color: $brand-green-dark; // Usando tu variable de color
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $brand-gray-dark; // Usando tu variable para texto oscuro
+    text-align: center;
+}
+
+.logoGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem; // Espacio generoso entre logos
+}
+
+.logoWrapper {
+    // Estilos para el contenedor de cada logo
+    svg {
+        height: 40px;
+        width: auto;
+        fill: #9ca3af; // Un gris neutro para el estado inicial
+        transition: fill $transition-speed ease-in-out; // Usando tu variable de transición
+    }
+
+    &:hover {
+        svg {
+            fill: $brand-gray-dark; // Se oscurece al pasar el mouse, usando tu variable
+        }
+    }
+}
+
+// --- Media Queries usando tus breakpoints ---
+@media (max-width: $breakpoint-md) {
+    .clientLogoSection {
+        padding: 4rem 0;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .logoGrid {
+        gap: 3rem 2rem; // Menos espacio en pantallas pequeñas
+    }
+
+    .logoWrapper svg {
+        height: 35px;
+    }
+}

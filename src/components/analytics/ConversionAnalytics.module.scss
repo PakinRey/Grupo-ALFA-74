@@ -1,0 +1,167 @@
+@use '../../assets/scss/variables' as *;
+
+.floatingButton {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-accent);
+    color: var(--text-on-accent);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all $transition-speed ease;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: var(--color-accent-dark);
+    }
+
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 32, 44, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity $transition-speed ease;
+    
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.modalContent {
+    background-color: var(--bg-secondary);
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    border-radius: $border-radius;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    transition: transform $transition-speed ease;
+
+    &.visible {
+       transform: scale(1);
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    
+    h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        &:hover { color: var(--text-primary); }
+        svg { width: 28px; height: 28px; }
+    }
+}
+
+.metricsDashboard {
+    flex-grow: 1;
+    overflow-y: auto; // Permite scroll si el contenido es muy largo
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.summaryCards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    border-left: 5px solid var(--color-accent);
+
+    .label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+    }
+
+    .value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+}
+
+.chartContainer {
+    background-color: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: $border-radius;
+}
+
+.eventLog {
+    grid-column: 1 / -1; // Ocupa todo el ancho en desktop
+    
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        max-height: 250px;
+        overflow-y: auto;
+        border: 1px solid var(--border-color);
+        border-radius: $border-radius;
+    }
+
+    li {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .eventType { font-weight: 600; }
+        .eventTime { font-size: 0.9rem; color: var(--text-secondary); }
+    }
+}

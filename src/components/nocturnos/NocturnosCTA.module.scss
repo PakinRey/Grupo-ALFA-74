@@ -1,0 +1,68 @@
+// src/components/nocturnos/NocturnosCTA.module.scss
+@use '../../assets/scss/variables' as var;
+
+.ctaSection {
+  padding: 6rem 0;
+  background-color: var.$color-background-light;
+}
+
+.ctaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (min-width: var.$breakpoint-lg) {
+    grid-template-columns: 1fr 1.1fr;
+  }
+}
+
+.valueColumn {
+  h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var.$color-text-primary;
+  }
+
+  p {
+    font-size: 1.15rem;
+    color: var.$color-text-secondary;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.benefitIcon {
+  flex-shrink: 0;
+  color: var.$color-primary;
+  background-color: var.$color-primary-light;
+  font-size: 1.2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formColumn {
+  // El estilo viene del componente ContactFormBlock
+}

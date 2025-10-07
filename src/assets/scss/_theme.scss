@@ -1,0 +1,31 @@
+// src/assets/scss/_theme.scss
+
+// Importa las variables SASS para usarlas
+@use 'variables' as *;
+@use 'sass:color';
+
+// Define las variables CSS (Custom Properties) para el tema
+:root {
+  --bg-primary: #{$brand-gray-light};
+  --bg-secondary: #{$brand-white};
+  --text-primary: #{$brand-gray-dark};
+  --text-secondary: #{color.mix($brand-gray-dark, $brand-white, 70%)}; 
+  --border-color: #{$brand-gray-medium};
+  --color-accent: #{$brand-green-bright};
+  --color-accent-dark: #{$brand-green-medium};
+  --text-on-accent: #{$brand-white};
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  --color-dark-blue: #1a202c;
+  --text-secondary-light: #a0aec0;
+}
+
+// (Opcional) Si quisiéramos un tema oscuro en el futuro, solo añadiríamos esto:
+
+[data-theme="dark"] {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --border-color: #4a5568;
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
