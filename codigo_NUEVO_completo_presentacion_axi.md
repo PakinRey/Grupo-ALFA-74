@@ -4,7 +4,7 @@
 
 ## Archivo: `AXI_marketin.html`
 
-```
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -352,9 +352,403 @@ renderSlide();
 
 ---
 
-## Archivo: `index.html`
+## Archivo: `codigo_NUEVO_completo_presentacion_axi.md`
+
+```markdown
+# Compilación de Código del Proyecto: grupo-alfa74-frontend
+
+---
+
+## Archivo: `AXI_marketin.html`
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación de Servicios | Axi Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f4f4; /* Un gris muy claro para contraste */
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Custom brand color from PDF */
+        :root {
+            --brand-color: #88001b; /* Dark Red */
+            --brand-color-dark: #6d0015; /* Darker Red */
+            --background-light: #FDFCF9; /* Crema/Off-white */
+        }
+        .bg-brand { background-color: var(--brand-color); }
+        .text-brand { color: var(--brand-color); }
+        .border-brand { border-color: var(--brand-color); }
+        .hover\:bg-brand-dark:hover { background-color: var(--brand-color-dark); }
+        .bg-light { background-color: var(--background-light); }
+
+        /* Estilo del Mockup de Teléfono */
+        .phone-mockup {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            height: 640px;
+            margin: auto;
+            border: 16px solid #111;
+            border-top-width: 60px;
+            border-bottom-width: 60px;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .phone-mockup:before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            border-radius: 10px;
+        }
+        .phone-mockup .screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            overflow-y: auto;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-2 sm:p-4">
+
+    <main class="w-full max-w-6xl bg-light rounded-2xl shadow-2xl overflow-hidden flex flex-col" style="height: 800px;">
+        
+        <div id="presentation-container" class="flex-grow p-6 md:p-12 overflow-y-auto">
+            <!-- Las diapositivas se cargarán aquí -->
+        </div>
+
+        <!-- Barra de Navegación y Progreso -->
+        <footer class="bg-gray-50 border-t border-gray-200 p-4 flex items-center justify-between">
+            <div class="text-sm font-medium text-gray-600">
+                Diapositiva <span id="current-slide-number">1</span> de <span id="total-slides-number">7</span>
+            </div>
+            <div class="w-1/3 mx-4">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-brand h-2.5 rounded-full transition-all duration-300" style="width: 14%;"></div>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button id="prev-btn" class="px-5 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                    Anterior
+                </button>
+                <button id="next-btn" class="px-5 py-2 text-sm font-semibold text-white bg-brand rounded-lg hover:bg-brand-dark disabled:opacity-50 transition-all">
+                    Siguiente
+                </button>
+            </div>
+        </footer>
+    </main>
+
+<script>
+const slidesData = [
+    {
+        type: 'title',
+        title: 'Axi Marketing',
+        subtitle: 'Estrategias Digitales que Construyen Marcas',
+        logo: `
+            <div class="w-28 h-28 mb-8 bg-brand rounded-full flex items-center justify-center text-white text-4xl font-bold tracking-wider">
+                Axi
+            </div>`
+    },
+    {
+        type: 'services',
+        title: 'Servicios Ofrecidos',
+        subtitle: 'Una solución integral para potenciar su presencia digital.',
+        items: [
+            { title: 'Community Management', description: 'Gestión de redes, interacción y moderación.' },
+            { title: 'Estrategia de Contenidos', description: 'Planificación, creación y calendarios editoriales.' },
+            { title: 'Publicidad Digital', description: 'Campañas en Redes Sociales y Google Ads.' },
+            { title: 'Análisis y Reportes', description: 'Seguimiento de métricas, informes de rendimiento y análisis de ROI.' },
+            { title: 'Desarrollo de Marca', description: 'Diseño de identidad visual y estrategias de branding.' },
+            { title: 'Gestión de Crisis', description: 'Manejo de reputación en línea y respuesta a comentarios.' }
+        ]
+    },
+    {
+        type: 'process',
+        title: 'Nuestro Proceso de Trabajo',
+        subtitle: 'Un ciclo estratégico enfocado en resultados medibles y transparentes.',
+        steps: [
+            { name: 'Planificación', description: 'Investigación, análisis de la marca y definición de objetivos.' },
+            { name: 'Ejecución', description: 'Creación de contenido y gestión de campañas publicitarias.' },
+            { name: 'Monitoreo y Ajuste', description: 'Seguimiento del rendimiento y optimización en tiempo real.' },
+            { name: 'Informe y Evaluación', description: 'Presentación de resultados y recomendaciones para el futuro.' }
+        ]
+    },
+    {
+        type: 'objectives',
+        title: 'Objetivos de la Campaña',
+        subtitle: 'Metas claras para un crecimiento tangible.',
+        image: 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop',
+        points: [
+            '<strong>Posicionar la empresa</strong> como líder en su industria.',
+            '<strong>Atraer clientes B2B</strong> de alto valor (constructoras, arquitectos, etc.).',
+            '<strong>Aumentar la interacción</strong> y construir una comunidad leal en redes sociales.'
+        ]
+    },
+    {
+        type: 'content-visualization',
+        title: 'Estrategia y Visualización de Contenido',
+        subtitle: 'Así es como damos vida a la marca, combinando formatos estratégicamente.',
+        phone_images: [
+            'https://placehold.co/400x400/1a2e44/ffffff?text=Proyecto+1',
+            'https://placehold.co/400x400/3a5a78/ffffff?text=Detalle',
+            'https://placehold.co/400x400/88001b/ffffff?text=Reel',
+            'https://placehold.co/400x400/4f6a8a/ffffff?text=Equipo',
+            'https://placehold.co/400x400/2c4664/ffffff?text=Proceso',
+            'https://placehold.co/400x400/6a89ac/ffffff?text=Testimonio',
+            'https://placehold.co/400x400/88001b/ffffff?text=Reel',
+            'https://placehold.co/400x400/1f3651/ffffff?text=Infografía',
+            'https://placehold.co/400x400/3e6083/ffffff?text=Proyecto+2',
+        ],
+        plan: {
+            title: 'Plan de Contenidos',
+            items: [
+                '<strong>Posts de Proyectos:</strong> Muestran la calidad y el alcance del trabajo realizado.',
+                '<strong>Reels Dinámicos:</strong> Capturan el proceso y la acción para generar mayor engagement.',
+                '<strong>Contenido de Valor:</strong> Infografías y carruseles que educan a la audiencia B2B.',
+                '<strong>Prueba Social:</strong> Testimonios de clientes satisfechos para generar confianza.'
+            ]
+        }
+    },
+    {
+        type: 'case-study',
+        title: 'Casos de Éxito',
+        subtitle: 'Nuestra metodología se traduce en resultados concretos.',
+        points: [
+            '<strong>Proyectos Anteriores:</strong> Portafolio de trabajos realizados con documentación detallada de los resultados obtenidos.',
+            '<strong>Testimonios de Clientes:</strong> Opiniones y experiencias de clientes satisfechos que validan nuestro compromiso y eficacia.'
+        ],
+        image: 'https://images.unsplash.com/photo-1579532582937-16c108930bf6?q=80&w=1974&auto=format&fit=crop'
+    },
+    {
+        type: 'final',
+        title: '¿Listos para empezar?',
+        cta: 'Contáctenos para diseñar un paquete personalizado que se ajuste a sus necesidades y objetivos.',
+        logo: `
+            <div class="w-24 h-24 mb-8 bg-white rounded-full flex items-center justify-center text-brand text-3xl font-bold tracking-wider">
+                Axi
+            </div>`
+    }
+];
+
+let currentSlide = 0;
+const presentationContainer = document.getElementById('presentation-container');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const currentSlideEl = document.getElementById('current-slide-number');
+const totalSlidesEl = document.getElementById('total-slides-number');
+const progressBar = document.getElementById('progress-bar');
+
+function renderSlide() {
+    presentationContainer.innerHTML = '';
+    const slideData = slidesData[currentSlide];
+    const slideElement = document.createElement('div');
+    slideElement.className = 'slide active h-full';
+
+    let contentHTML = '';
+
+    switch (slideData.type) {
+        case 'title':
+            contentHTML = `
+                <div class="h-full flex flex-col items-center justify-center text-center p-4">
+                    ${slideData.logo}
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800">${slideData.title}</h1>
+                    <p class="mt-4 text-xl md:text-2xl text-gray-500">${slideData.subtitle}</p>
+                </div>`;
+            break;
+        case 'services':
+            contentHTML = `
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-4">${slideData.title}</h2>
+                <p class="text-lg text-gray-500 text-center mb-10">${slideData.subtitle}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    ${slideData.items.map(item => `
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-t-4 border-brand">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">${item.title}</h3>
+                            <p class="text-gray-600">${item.description}</p>
+                        </div>
+                    `).join('')}
+                </div>`;
+            break;
+        case 'process':
+            contentHTML = `
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-4">${slideData.title}</h2>
+                <p class="text-lg text-gray-500 text-center mb-12">${slideData.subtitle}</p>
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="absolute left-1/2 w-0.5 h-full bg-gray-200 -translate-x-1/2 hidden md:block"></div>
+                    <div class="space-y-12 md:space-y-0">
+                    ${slideData.steps.map((step, index) => `
+                        <div class="relative md:flex items-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}">
+                            <div class="md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}">
+                                <div class="bg-white p-6 rounded-lg shadow-lg">
+                                    <p class="text-brand font-bold text-lg">Fase ${index + 1}</p>
+                                    <h3 class="text-xl font-bold text-gray-800">${step.name}</h3>
+                                    <p class="text-gray-600 mt-2">${step.description}</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2 w-10 h-10 bg-brand rounded-full border-4 border-light hidden md:flex items-center justify-center text-white font-bold">${index + 1}</div>
+                        </div>
+                    `).join('')}
+                    </div>
+                </div>`;
+            break;
+        case 'objectives':
+             contentHTML = `
+                <h2 class="text-4xl font-bold text-gray-800 mb-8">${slideData.title}</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <ul class="space-y-6 text-xl text-gray-600">
+                        ${slideData.points.map(p => `<li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-4 text-brand flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>${p}</span></li>`).join('')}
+                    </ul>
+                    <div><img src="${slideData.image}" class="rounded-lg shadow-xl aspect-[4/3] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x450/cccccc/ffffff?text=Imagen';"></div>
+                </div>`;
+            break;
+        case 'content-visualization':
+            contentHTML = `
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-4">${slideData.title}</h2>
+                <p class="text-lg text-gray-500 text-center mb-10">${slideData.subtitle}</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="phone-mockup">
+                        <div class="screen">
+                            <div class="grid grid-cols-3 gap-1">
+                                ${slideData.phone_images.map(img => `<img src="${img}" class="aspect-square object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/ffffff?text=Post';">`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-5">${slideData.plan.title}</h3>
+                        <ul class="space-y-4 text-lg text-gray-600">
+                           ${slideData.plan.items.map(i => `<li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-brand flex-shrink-0 mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span>${i}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                </div>`;
+            break;
+        case 'case-study':
+            contentHTML = `
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-4">${slideData.title}</h2>
+                <p class="text-lg text-gray-500 text-center mb-10">${slideData.subtitle}</p>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div><img src="${slideData.image}" class="rounded-lg shadow-xl aspect-[4/3] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x450/cccccc/ffffff?text=Imagen';"></div>
+                    <ul class="space-y-6 text-xl text-gray-600">
+                        ${slideData.points.map(p => `<li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-4 text-brand flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>${p}</span></li>`).join('')}
+                    </ul>
+                </div>`;
+            break;
+        case 'final':
+            contentHTML = `
+                <div class="h-full flex flex-col items-center justify-center text-center p-4 bg-brand rounded-2xl">
+                    ${slideData.logo}
+                    <h2 class="text-5xl font-extrabold text-white">${slideData.title}</h2>
+                    <p class="mt-6 text-xl max-w-2xl text-white/90">${slideData.cta}</p>
+                    <button class="mt-10 px-8 py-3 bg-white text-brand font-bold rounded-lg text-lg hover:bg-gray-200 transition-colors">
+                        Contactar Ahora
+                    </button>
+                </div>`;
+            slideElement.classList.add('p-0');
+            break;
+    }
+
+    slideElement.innerHTML = contentHTML;
+    presentationContainer.appendChild(slideElement);
+    updateControls();
+}
+
+function updateControls() {
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slidesData.length - 1;
+    currentSlideEl.textContent = currentSlide + 1;
+    totalSlidesEl.textContent = slidesData.length;
+    progressBar.style.width = `${((currentSlide + 1) / slidesData.length) * 100}%`;
+}
+
+prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) {
+        currentSlide--;
+        renderSlide();
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    if (currentSlide < slidesData.length - 1) {
+        currentSlide++;
+        renderSlide();
+    }
+});
+
+// Initial render
+renderSlide();
+</script>
+
+</body>
+</html>
+
 
 ```
+
+---
+
+## Archivo: `eslint.config.js`
+
+```javascript
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+])
+
+```
+
+---
+
+## Archivo: `index.html`
+
+```html
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-MX" xml:lang="es-MX">
   <head>
@@ -374,9 +768,58 @@ renderSlide();
 
 ---
 
-## Archivo: `present_agencia.html`
+## Archivo: `package.json`
+
+```json
+{
+  "name": "grupo-alfa74-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "framer-motion": "^12.23.22",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-helmet-next": "^0.0.2",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.3",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "sass-embedded": "^1.93.2",
+    "tailwindcss": "^3.4.17",
+    "vite": "npm:rolldown-vite@7.1.12"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.1.12"
+  }
+}
 
 ```
+
+---
+
+## Archivo: `present_agencia.html`
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -750,9 +1193,83 @@ renderSlide();
 
 ---
 
-## Archivo: `src\App.jsx`
+## Archivo: `README.md`
+
+```markdown
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
 ```
+
+---
+
+## Archivo: `src\App.css`
+
+```css
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+```
+
+---
+
+## Archivo: `src\App.jsx`
+
+```jsx
 // src/App.jsx
 
 import { Routes, Route } from 'react-router-dom';
@@ -803,7 +1320,7 @@ export default App;
 
 ## Archivo: `src\components\analytics\ConversionAnalytics.jsx`
 
-```
+```jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Chart from 'chart.js/auto';
@@ -957,7 +1474,7 @@ export const ConversionAnalytics = () => {
 
 ## Archivo: `src\components\common\Footer\Footer.jsx`
 
-```
+```jsx
 // src/components/common/Footer/Footer.jsx
 
 import React from 'react';
@@ -1043,7 +1560,7 @@ export const Footer = () => {
 
 ## Archivo: `src\components\common\Navbar\Navbar.jsx`
 
-```
+```jsx
 // src/components/common/Navbar/Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -1140,7 +1657,7 @@ export const Navbar = () => {
 
 ## Archivo: `src\components\common\Navbar\NavDropdown.jsx`
 
-```
+```jsx
 // src/components/common/Navbar/NavDropdown.jsx
 import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -1246,7 +1763,7 @@ export const NavDropdown = ({ link, onLinkClick }) => {
 
 ## Archivo: `src\components\common\ScrollToTop.jsx`
 
-```
+```jsx
 // src/components/common/ScrollToTop.jsx
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -1270,11 +1787,11 @@ export function ScrollToTop() {
 
 ## Archivo: `src\components\contact\ContactFormBlock.jsx`
 
-```
+```jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ContactFormBlock.module.scss';
-import { useConversion } from '/src/hooks/useConversion.js';
+import { useConversion } from '@/hooks/useConversion.js';
 
 // --- Iconos SVG ---
 const PaperPlaneIcon = () => (
@@ -1460,7 +1977,7 @@ export default ContactFormBlock;
 
 ## Archivo: `src\components\corporativos\CorporativosCTA.jsx`
 
-```
+```jsx
 // src/components/corporativos/CorporativosCTA.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -1523,7 +2040,7 @@ export const CorporativosCTA = () => {
 
 ## Archivo: `src\components\corporativos\CorporativosHeader.jsx`
 
-```
+```jsx
 // src/components/corporativos/CorporativosHeader.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -1597,7 +2114,7 @@ export const CorporativosHeader = () => {
 
 ## Archivo: `src\components\corporativos\GaleriaCorporativos.jsx`
 
-```
+```jsx
 // src/components/corporativos/GaleriaCorporativos.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -1651,7 +2168,7 @@ export const GaleriaCorporativos = () => {
 
 ## Archivo: `src\components\corporativos\MetodologiaGestion.jsx`
 
-```
+```jsx
 // src/components/corporativos/MetodologiaGestion.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -1750,7 +2267,7 @@ export const MetodologiaGestion = () => {
 
 ## Archivo: `src\components\corporativos\PortafolioSoluciones.jsx`
 
-```
+```jsx
 // src/components/corporativos/PortafolioSoluciones.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -1872,7 +2389,7 @@ export const PortafolioSoluciones = () => {
 
 ## Archivo: `src\components\corporativos\ValuePropositionCorporativos.jsx`
 
-```
+```jsx
 // src/components/corporativos/ValuePropositionCorporativos.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -1941,7 +2458,7 @@ export const ValuePropositionCorporativos = () => {
 
 ## Archivo: `src\components\espectaculares\EspectacularesHeader.jsx`
 
-```
+```jsx
 // src/components/espectaculares/EspectacularesHeader.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2000,7 +2517,7 @@ export const EspectacularesHeader = () => {
 
 ## Archivo: `src\components\espectaculares\GaleriaEspectaculares.jsx`
 
-```
+```jsx
 // src/components/espectaculares/GaleriaEspectaculares.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2081,7 +2598,7 @@ export const GaleriaEspectaculares = () => {
 
 ## Archivo: `src\components\espectaculares\IntroEspectaculares.jsx`
 
-```
+```jsx
 // src/components/espectaculares/IntroEspectaculares.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2145,7 +2662,7 @@ export const IntroEspectaculares = () => {
 
 ## Archivo: `src\components\espectaculares\ProcesoEspectaculares.jsx`
 
-```
+```jsx
 // src/components/espectaculares/ProcesoEspectaculares.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -2242,7 +2759,7 @@ export const ProcesoEspectaculares = () => {
 
 ## Archivo: `src\components\espectaculares\TiposEspectaculares.jsx`
 
-```
+```jsx
 // src/components/espectaculares/TiposEspectaculares.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -2319,7 +2836,7 @@ export const TiposEspectaculares = () => {
 
 ## Archivo: `src\components\espectaculares\VentajasTecnicas.jsx`
 
-```
+```jsx
 // src/components/espectaculares/VentajasTecnicas.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2390,7 +2907,7 @@ export const VentajasTecnicas = () => {
 
 ## Archivo: `src\components\Footer\Footer.jsx`
 
-```
+```jsx
 import React from 'react';
 
 export const Footer = () => {
@@ -2418,7 +2935,7 @@ export const Footer = () => {
 
 ## Archivo: `src\components\home\BlogHighlight.jsx`
 
-```
+```jsx
 // src/components/home/BlogHighlight.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2521,7 +3038,7 @@ export const BlogHighlight = () => {
 
 ## Archivo: `src\components\home\ClientLogoBar.jsx`
 
-```
+```jsx
 // src/components/home/ClientLogoBar.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -2594,7 +3111,7 @@ export const ClientLogoBar = () => {
 
 ## Archivo: `src\components\home\FinalCTA.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './FinalCTA.module.scss';
@@ -2671,7 +3188,7 @@ export const FinalCTA = () => {
 
 ## Archivo: `src\components\home\HeroSection.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './HeroSection.module.scss';
@@ -2760,7 +3277,7 @@ export const HeroSection = () => {
 
 ## Archivo: `src\components\home\ProjectsHighlight.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './ProjectsHighlight.module.scss';
@@ -2859,7 +3376,7 @@ export const ProjectsHighlight = () => {
 
 ## Archivo: `src\components\home\ServicesOverview.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './ServicesOverview.module.scss';
@@ -2966,7 +3483,7 @@ export const ServicesOverview = () => {
 
 ## Archivo: `src\components\home\Testimonials.jsx`
 
-```
+```jsx
 import React from 'react';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
@@ -3061,7 +3578,7 @@ export const Testimonials = () => {
 
 ## Archivo: `src\components\home\TrustBar.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './TrustBar.module.scss';
@@ -3125,7 +3642,7 @@ export const TrustBar = () => {
 
 ## Archivo: `src\components\home\ValueProposition.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './ValueProposition.module.scss';
@@ -3237,7 +3754,7 @@ export const ValueProposition = () => {
 
 ## Archivo: `src\components\home\WorkProcess.jsx`
 
-```
+```jsx
 // src/components/home/WorkProcess.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -3358,7 +3875,7 @@ export const WorkProcess = () => {
 
 ## Archivo: `src\components\Navbar\Navbar.jsx`
 
-```
+```jsx
 import React, { useState } from 'react';
 
 // Icono para el menú hamburguesa (puedes usar una librería de iconos o un SVG como este)
@@ -3444,7 +3961,7 @@ export const Navbar = () => {
 
 ## Archivo: `src\components\naves\CTAConsultation.jsx`
 
-```
+```jsx
 // src/components/naves/CTAConsultation.jsx
 import React from 'react';
 import styles from './CTAConsultation.module.scss';
@@ -3480,7 +3997,7 @@ export const CTAConsultation = () => {
 
 ## Archivo: `src\components\naves\GaleriaNaves.jsx`
 
-```
+```jsx
 // src/components/naves/GaleriaNaves.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -3534,7 +4051,7 @@ export const GaleriaNaves = () => {
 
 ## Archivo: `src\components\naves\NavesCTA.jsx`
 
-```
+```jsx
 // src/components/naves/NavesCTA.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -3599,7 +4116,7 @@ export const NavesCTA = () => {
 
 ## Archivo: `src\components\naves\NavesHeader.jsx`
 
-```
+```jsx
 // src/components/naves/NavesHeader.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -3673,7 +4190,7 @@ export const NavesHeader = () => {
 
 ## Archivo: `src\components\naves\ProcesoNaves.jsx`
 
-```
+```jsx
 // src/components/naves/ProcesoNaves.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -3776,7 +4293,7 @@ export const ProcesoNaves = () => {
 
 ## Archivo: `src\components\naves\TiposNaves.jsx`
 
-```
+```jsx
 // src/components/naves/TiposNaves.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
@@ -3887,7 +4404,7 @@ export const TiposNaves = () => {
 
 ## Archivo: `src\components\naves\ValuePropositionNaves.jsx`
 
-```
+```jsx
 // src/components/naves/ValuePropositionNaves.jsx
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -3973,7 +4490,7 @@ export const ValuePropositionNaves = () => {
 
 ## Archivo: `src\components\nocturnos\GaleriaNocturnos.jsx`
 
-```
+```jsx
 // src/components/nocturnos/GaleriaNocturnos.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -4031,7 +4548,7 @@ export const GaleriaNocturnos = () => {
 
 ## Archivo: `src\components\nocturnos\MetodologiaNocturnos.jsx`
 
-```
+```jsx
 // src/components/nocturnos/MetodologiaNocturnos.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -4128,7 +4645,7 @@ export const MetodologiaNocturnos = () => {
 
 ## Archivo: `src\components\nocturnos\NocturnosCTA.jsx`
 
-```
+```jsx
 // src/components/nocturnos/NocturnosCTA.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -4191,7 +4708,7 @@ export const NocturnosCTA = () => {
 
 ## Archivo: `src\components\nocturnos\NocturnosHeader.jsx`
 
-```
+```jsx
 // src/components/nocturnos/NocturnosHeader.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -4256,7 +4773,7 @@ export const NocturnosHeader = () => {
 
 ## Archivo: `src\components\nocturnos\ServiciosEspecializados.jsx`
 
-```
+```jsx
 // src/components/nocturnos/ServiciosEspecializados.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -4307,7 +4824,7 @@ export const ServiciosEspecializados = () => {
 
 ## Archivo: `src\components\nocturnos\ValuePropositionNocturnos.jsx`
 
-```
+```jsx
 // src/components/nocturnos/ValuePropositionNocturnos.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -4372,7 +4889,7 @@ export const ValuePropositionNocturnos = () => {
 
 ## Archivo: `src\components\projects\ProjectsGrid.jsx`
 
-```
+```jsx
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ProjectsGrid.module.scss';
@@ -4504,7 +5021,7 @@ export const ProjectsGrid = () => {
 
 ## Archivo: `src\components\projects\ProjectsHeader.jsx`
 
-```
+```jsx
 // src/components/projects/ProjectsHeader.jsx
 
 import React from 'react';
@@ -4569,7 +5086,7 @@ export const ProjectsHeader = () => {
 
 ## Archivo: `src\components\services\CTAConsultation.jsx`
 
-```
+```jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CTAConsultation.module.scss';
@@ -4710,7 +5227,7 @@ export const CTAConsultation = () => {
 
 ## Archivo: `src\components\services\ServiceDetailTabs.jsx`
 
-```
+```jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ServiceDetailTabs.module.scss';
@@ -4814,7 +5331,7 @@ export const ServiceDetailTabs = () => {
 
 ## Archivo: `src\components\services\ServicesHeader.jsx`
 
-```
+```jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './ServicesHeader.module.scss';
@@ -4899,7 +5416,7 @@ export const ServicesHeader = () => {
 
 ## Archivo: `src\components\services\TechnicalFAQs.jsx`
 
-```
+```jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './TechnicalFAQs.module.scss';
@@ -5010,7 +5527,7 @@ export const TechnicalFAQs = () => {
 
 ## Archivo: `src\context\ConversionContext.jsx`
 
-```
+```jsx
 import React, { createContext, useState, useCallback } from 'react';
 
 // 1. Crear el Contexto
@@ -5054,7 +5571,7 @@ export const ConversionProvider = ({ children }) => {
 
 ## Archivo: `src\hocs\withConversionTracking.jsx`
 
-```
+```jsx
 import React from 'react';
 import { useConversion } from '/src/hooks/useConversion.js';
 
@@ -5090,9 +5607,63 @@ export const withConversionTracking = (WrappedComponent) => {
 
 ---
 
-## Archivo: `src\main.jsx`
+## Archivo: `src\hooks\useConversion.js`
+
+```javascript
+import React, { createContext, useState, useCallback } from 'react';
+
+// 1. Crear el Contexto
+export const ConversionContext = createContext(null);
+
+// 2. Crear el Proveedor del Contexto
+export const ConversionProvider = ({ children }) => {
+  const [conversions, setConversions] = useState([]);
+
+  // Función para registrar un nuevo evento de conversión
+  const logConversion = useCallback((type) => {
+    // Simulamos el envío de datos a Google Ads (gtag)
+    console.log(`%c[Google Ads Simulation] Evento de Conversión Registrado:
+- Tipo: ${type}
+- Timestamp: ${new Date().toISOString()}`, 'color: #9CCC3C; font-weight: bold;');
+
+    const newConversion = {
+      type,
+      timestamp: new Date(),
+      id: `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    };
+
+    setConversions(prevConversions => [...prevConversions, newConversion]);
+  }, []);
+
+  const value = {
+    conversions,
+    logConversion,
+  };
+
+  return (
+    <ConversionContext.Provider value={value}>
+      {children}
+    </ConversionContext.Provider>
+  );
+};
 
 ```
+
+---
+
+## Archivo: `src\index.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+---
+
+## Archivo: `src\main.jsx`
+
+```jsx
 // src/main.jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -5124,7 +5695,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ## Archivo: `src\pages\CentrosNocturnosPage.jsx`
 
-```
+```jsx
 // src/pages/CentrosNocturnosPage.jsx
 import React from 'react';
 import { Helmet } from 'react-helmet-next';
@@ -5163,7 +5734,7 @@ export default CentrosNocturnosPage;
 
 ## Archivo: `src\pages\ContactPage.jsx`
 
-```
+```jsx
 // src/pages/ContactPage.jsx
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-next';
@@ -5174,7 +5745,7 @@ import { Link } from 'react-router-dom';
 // Componentes reutilizables que usarás
 import { TechnicalFAQs } from '../components/services/TechnicalFAQs.jsx';
 import { CTAConsultation } from '../components/services/CTAConsultation.jsx'; 
-import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
+// import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
 
 // --- Datos Estáticos para la Página de Contacto con URLs de Mapas Reales ---
 const locationsData = [
@@ -5291,11 +5862,11 @@ export function ContactPage() {
             </section>
 
             {/* 3. Contact Form Block (Reutiliza el componente modular) */}
-            <ContactFormBlock
+            {/* <ContactFormBlock
                 title="Inicie su Cotización sin Compromiso"
                 subtitle="Complete el formulario y adjunte sus planos o requerimientos. Nuestro equipo técnico responderá en 24 horas."
                 agreementText="Acepto el tratamiento de mis datos personales según el <a href='/politica-privacidad' target='_blank'>Aviso de Privacidad</a>."
-            />
+            /> */}
 
             {/* 4. Two-Column Text (Otras Formas de Contacto) */}
             <section className={styles.twoColumnTextSection}>
@@ -5354,7 +5925,7 @@ export default ContactPage;
 
 ## Archivo: `src\pages\EdificiosCorporativosPage.jsx`
 
-```
+```jsx
 // src/pages/EdificiosCorporativosPage.jsx
 import React from 'react';
 import { CorporativosHeader } from '../components/corporativos/CorporativosHeader.jsx';
@@ -5386,7 +5957,7 @@ export default EdificiosCorporativosPage;
 
 ## Archivo: `src\pages\EspectacularesPage.jsx`
 
-```
+```jsx
 // src/pages/EspectacularesPage.jsx
 import React from 'react';
 import { Helmet } from 'react-helmet-next';
@@ -5442,7 +6013,7 @@ export default EspectacularesPage;
 
 ## Archivo: `src\pages\HomePage.jsx`
 
-```
+```jsx
 // src/pages/HomePage.jsx
 import React from 'react';
 import { Helmet } from 'react-helmet-next';
@@ -5484,7 +6055,7 @@ export function HomePage() {
 
 ## Archivo: `src\pages\NavesIndustrialesPage.jsx`
 
-```
+```jsx
 // src/pages/NavesIndustrialesPage.jsx
 import React from 'react';
 import { NavesHeader } from '../components/naves/NavesHeader.jsx';
@@ -5515,7 +6086,7 @@ export default NavesIndustrialesPage;
 
 ## Archivo: `src\pages\ProjectsPage.jsx`
 
-```
+```jsx
 // src/pages/ProjectsPage.jsx
 import React from 'react';
 
@@ -5539,7 +6110,7 @@ export function ProjectsPage() {
 
 ## Archivo: `src\pages\ServicesPage.jsx`
 
-```
+```jsx
 // src/pages/ServicesPage.jsx
 import React from 'react';
 
@@ -5559,5 +6130,43 @@ export function ServicesPage() {
     </>
   );
 }
+```
+
+---
+
+## Archivo: `tailwind.config.js`
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}", // Aquí le dices que escanee todos los archivos JS/JSX en src
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+---
+
+## Archivo: `vite.config.js`
+
+```javascript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path' // <-- ¡Importante!
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+})
 ```
 
