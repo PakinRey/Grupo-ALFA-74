@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 import styles from './NavesCTA.module.scss';
-import ContactFormBlock from '@/components/contact/ContactFormBlock.jsx';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
 
 const benefits = [
   'Análisis técnico preliminar sin costo.',
