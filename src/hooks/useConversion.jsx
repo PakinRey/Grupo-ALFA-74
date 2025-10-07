@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useContext } from 'react'; // <-- Asegúrate que useContext esté aquí
 
 // 1. Crear el Contexto
 export const ConversionContext = createContext(null);
@@ -7,12 +7,8 @@ export const ConversionContext = createContext(null);
 export const ConversionProvider = ({ children }) => {
   const [conversions, setConversions] = useState([]);
 
-  // Función para registrar un nuevo evento de conversión
   const logConversion = useCallback((type) => {
-    // Simulamos el envío de datos a Google Ads (gtag)
-    console.log(`%c[Google Ads Simulation] Evento de Conversión Registrado:
-- Tipo: ${type}
-- Timestamp: ${new Date().toISOString()}`, 'color: #9CCC3C; font-weight: bold;');
+    console.log(`%c[Google Ads Simulation]...`, 'color: #9CCC3C;');
 
     const newConversion = {
       type,
@@ -33,4 +29,13 @@ export const ConversionProvider = ({ children }) => {
       {children}
     </ConversionContext.Provider>
   );
+};
+
+// 3. Crear y Exportar el Hook Personalizado (ESTA ES LA PARTE CLAVE)
+export const useConversion = () => {
+  const context = useContext(ConversionContext);
+  if (!context) {
+    throw new Error('useConversion debe ser usado dentro de un ConversionProvider');
+  }
+  return context;
 };

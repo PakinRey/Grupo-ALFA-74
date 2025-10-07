@@ -1,5 +1,5 @@
 import React from 'react';
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 
 /**
  * Un Componente de Orden Superior (HOC) que envuelve un componente (ej. un botón o enlace)

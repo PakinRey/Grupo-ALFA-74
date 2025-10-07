@@ -7,7 +7,7 @@ import App from './App.jsx';
 import './assets/scss/main.scss'
 
 // --- 1. Importa el Proveedor del Contexto ---
-import { ConversionProvider } from './context/ConversionContext.jsx';
+import { ConversionProvider } from './hooks/useConversion.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

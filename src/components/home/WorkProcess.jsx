@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClipboardList, FaDraftingCompass, FaCogs, FaHardHat } from 'react-icons/fa';
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 import styles from './WorkProcess.module.scss';
 
 const processSteps = [

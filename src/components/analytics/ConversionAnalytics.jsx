@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Chart from 'chart.js/auto';
 // npm install chart.js
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 import styles from './ConversionAnalytics.module.scss';
 
 // --- Iconos ---
