@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaFileSignature, FaUserTie, FaChartLine } from 'react-icons/fa';
 import styles from './CorporativosCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+import ContactFormBlock from '../contact/contactFormBlock.jsx';
 
 const benefits = [
   { icon: <FaUserTie />, text: 'Asesoría directa con un líder de proyecto.' },
