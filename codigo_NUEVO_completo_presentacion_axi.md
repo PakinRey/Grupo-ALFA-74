@@ -1325,7 +1325,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Chart from 'chart.js/auto';
 // npm install chart.js
-import { useConversion } from '/src/hooks/useConversion.js';
+import { useConversion } from '/src/hooks/useConversion.jsx';
 import styles from './ConversionAnalytics.module.scss';
 
 // --- Iconos ---
@@ -1791,7 +1791,7 @@ export function ScrollToTop() {
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ContactFormBlock.module.scss';
-import { useConversion } from '@/hooks/useConversion.js';
+import { useConversion } from '@/hooks/useConversion.jsx';
 
 // --- Iconos SVG ---
 const PaperPlaneIcon = () => (
@@ -3759,7 +3759,7 @@ export const ValueProposition = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClipboardList, FaDraftingCompass, FaCogs, FaHardHat } from 'react-icons/fa';
-import { useConversion } from '/src/hooks/useConversion.js';
+import { useConversion } from '/src/hooks/useConversion.jsx';
 import styles from './WorkProcess.module.scss';
 
 const processSteps = [
@@ -5573,7 +5573,7 @@ export const ConversionProvider = ({ children }) => {
 
 ```jsx
 import React from 'react';
-import { useConversion } from '/src/hooks/useConversion.js';
+import { useConversion } from '/src/hooks/useConversion.jsx';
 
 /**
  * Un Componente de Orden Superior (HOC) que envuelve un componente (ej. un botón o enlace)
@@ -5607,7 +5607,7 @@ export const withConversionTracking = (WrappedComponent) => {
 
 ---
 
-## Archivo: `src\hooks\useConversion.js`
+## Archivo: `src\hooks\useConversion.jsx`
 
 ```javascript
 import React, { createContext, useState, useCallback } from 'react';

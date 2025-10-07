@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ContactFormBlock.module.scss';
-import { useConversion } from '@/hooks/useConversion.jsx';
+import { useConversion } from '@/hooks/useConversion.jsxx';
 
 // --- Iconos SVG ---
 const PaperPlaneIcon = () => (
