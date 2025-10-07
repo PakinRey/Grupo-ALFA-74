@@ -763,6 +763,9 @@ import { ServicesPage } from './pages/ServicesPage.jsx';
 import { ProjectsPage } from './pages/ProjectsPage.jsx';
 import { ContactPage } from './pages/ContactPage.jsx';
 import { EspectacularesPage } from './pages/EspectacularesPage.jsx';
+import { NavesIndustrialesPage } from './pages/NavesIndustrialesPage.jsx';
+import { EdificiosCorporativosPage } from './pages/EdificiosCorporativosPage.jsx';
+import { CentrosNocturnosPage } from './pages/CentrosNocturnosPage.jsx';
 import { ConversionAnalytics } from './components/analytics/ConversionAnalytics.jsx';
 
 // --- ¡IMPORTA EL NUEVO COMPONENTE AQUÍ! ---
@@ -781,6 +784,9 @@ function App() {
           <Route path="/proyectos" element={<ProjectsPage />} />
           <Route path="/contacto" element={<ContactPage />} />
           <Route path="/servicios/estructuras-para-espectaculares" element={<EspectacularesPage />} />
+          <Route path="/servicios/naves-industriales" element={<NavesIndustrialesPage />} />
+          <Route path="/servicios/edificios-corporativos" element={<EdificiosCorporativosPage />} />
+          <Route path="/servicios/construccion-de-bares-y-centros-nocturnos" element={<CentrosNocturnosPage />} />
         </Routes>
       </main>
       <Footer />
@@ -1069,6 +1075,21 @@ export const Navbar = () => {
           to: '/servicios/estructuras-para-espectaculares',
           description: 'Soluciones de alto impacto visual y seguridad.'
         },
+        {
+          label: 'Naves Industriales', 
+          to: '/servicios/naves-industriales',
+          description: 'Construcción de Naves Industriales.'
+        },
+        {
+          label: 'Edificios Comerciales y Corporativos', 
+          to: '/servicios/edificios-corporativos',
+          description: 'Planes de uso mixto, edificios corporativos y plazas comerciales.'
+        },
+        {
+          label: 'Construcción de Bares y Centros Nocturnos', 
+          to: '/servicios/construccion-de-bares-y-centros-nocturnos',
+          description: 'Proyectos Bares, Antros y Centros Nocturnos.'
+        }
         // { label: 'Naves Industriales', to: '/servicios/naves-industriales', description: '...' }
       ]
     },
@@ -1247,7 +1268,7 @@ export function ScrollToTop() {
 
 ---
 
-## Archivo: `src\components\Contact\ContactFormBlock.jsx`
+## Archivo: `src\components\contact\ContactFormBlock.jsx`
 
 ```
 import React, { useState } from 'react';
@@ -1433,6 +1454,523 @@ const ContactFormBlock = ({ title, subtitle, agreementText }) => {
 
 export default ContactFormBlock;
 
+```
+
+---
+
+## Archivo: `src\components\corporativos\CorporativosCTA.jsx`
+
+```
+// src/components/corporativos/CorporativosCTA.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaFileSignature, FaUserTie, FaChartLine } from 'react-icons/fa';
+import styles from './CorporativosCTA.module.scss';
+import ContactFormBlock from '../contact/ContactFormBlock';
+
+const benefits = [
+  { icon: <FaUserTie />, text: 'Asesoría directa con un líder de proyecto.' },
+  { icon: <FaFileSignature />, text: 'Análisis de pre-factibilidad sin costo.' },
+  { icon: <FaChartLine />, text: 'Estimación de presupuesto y cronograma preliminar.' },
+];
+
+export const CorporativosCTA = () => {
+  return (
+    <section id="form" className={styles.ctaSection} aria-labelledby="cta-corp-title">
+      <div className={`container ${styles.ctaGrid}`}>
+        <motion.div 
+          className={styles.valueColumn}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 id="cta-corp-title">Conversemos sobre su Próximo Gran Proyecto</h2>
+          <p>
+            Permita que nuestra experiencia de 20 años transforme su visión en un activo rentable y duradero.
+            Inicie la conversación y obtenga:
+          </p>
+          <ul className={styles.benefitsList}>
+            {benefits.map((benefit, index) => (
+              <li key={index}>
+                <div className={styles.benefitIcon}>{benefit.icon}</div>
+                <span>{benefit.text}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div
+          className={styles.formColumn}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <ContactFormBlock
+            title="Solicite Asesoría y Estimación"
+            subtitle="Indique ubicación, m², sistema estructural y fecha objetivo."
+            agreementText='Acepto el <a href="/politica-privacidad" target="_blank">Aviso de Privacidad</a>.'
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\corporativos\CorporativosHeader.jsx`
+
+```
+// src/components/corporativos/CorporativosHeader.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import styles from './CorporativosHeader.module.scss';
+import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+
+const TrackedLink = withConversionTracking('a');
+
+export const CorporativosHeader = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <header className={styles.header} aria-label="Edificios Comerciales y Corporativos">
+      <div className={styles.mediaWrap} aria-hidden="true">
+        <video
+          className={styles.bgVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/corporativo_hero_poster.jpg"
+        >
+          <source src="/timelapse_corporativo.mp4" type="video/mp4" />
+        </video>
+        <div className={styles.overlay} />
+      </div>
+
+      <div className={`container ${styles.inner}`}>
+        <motion.h1
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+          animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }} 
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+        >
+          Construyendo los Futuros Centros de Negocio
+        </motion.h1>
+
+        <motion.p
+          className={styles.subtitle}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.55, ease: 'easeOut', delay: 0.1 }}
+        >
+          Materializamos visiones arquitectónicas con <strong>ingeniería de valor</strong>,
+          <strong> gestión integral</strong> y <strong>certeza en la ejecución</strong>.
+        </motion.p>
+
+        <motion.div
+          initial={prefersReducedMotion ? {} : { opacity: 0 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <TrackedLink
+            href="#form"
+            className={styles.cta}
+            conversionType="Solicitud_Corporativos_Hero"
+          >
+            Solicitar asesoría y estimación
+          </TrackedLink>
+        </motion.div>
+      </div>
+    </header>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\corporativos\CTAConsultation.jsx`
+
+```
+// src/components/corporativos/CTAConsultation.jsx
+import React from 'react';
+import styles from './CTAConsultation.module.scss';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+
+export const CTAConsultation = () => {
+  return (
+    <section className={styles.section} aria-labelledby="cta-corp-title">
+      <div className="container">
+        <h2 id="cta-corp-title" className={styles.title}>
+          Conversemos sobre tu proyecto corporativo o comercial
+        </h2>
+        <p className={styles.subtitle}>
+          Cuéntanos programa arquitectónico, superficie, sistemas de fachada/MEP y
+          cronograma. Respondemos en menos de 24 horas.
+        </p>
+
+        <div id="form" className={styles.formWrap}>
+          <ContactFormBlock
+            title="Solicitud de asesoría y estimación"
+            subtitle="Indica ubicación, m² por uso, sistema estructural preferido y fecha objetivo de apertura."
+            agreementText='Acepto el <a href="/politica-privacidad">Aviso de Privacidad</a>.'
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\corporativos\GaleriaCorporativos.jsx`
+
+```
+// src/components/corporativos/GaleriaCorporativos.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import styles from './GaleriaCorporativos.module.scss';
+
+const items = [
+  { title: 'Torre Corporativa — CDMX', image: '/edificio_corporativo_1.jpg' },
+  { title: 'Plaza Comercial — Bajío', image: '/plaza_comercial_1.jpg' },
+  { title: 'Uso Mixto — Monterrey', image: '/uso_mixto_1.jpg' },
+  { title: 'Campus Corporativo — Querétaro', image: '/edificio_corporativo_2.jpg' },
+];
+
+export const GaleriaCorporativos = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="galeria-corp-title">
+      <div className="container">
+        <motion.h2
+          id="galeria-corp-title"
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
+        >
+          Proyectos Emblemáticos
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {items.map((it) => (
+            <article key={it.title} className={styles.card}>
+              <img
+                src={it.image}
+                alt={it.title}
+                loading="lazy"
+                className={styles.image}
+              />
+              <div className={styles.caption}>{it.title}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\corporativos\MetodologiaGestion.jsx`
+
+```
+// src/components/corporativos/MetodologiaGestion.jsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import styles from './MetodologiaGestion.module.scss';
+
+const steps = [
+  {
+    title: '1) Fase de Pre-Construcción',
+    text:
+      'Ingeniería de valor, estimaciones, permisos, planeación de compras y cronograma maestro. Definimos riesgos y mitigaciones desde el inicio.',
+    image:
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    title: '2) Fase Estructural',
+    text:
+      'Cimentación y montaje de estructura (acero/concreto). Control dimensional, trazos y pruebas de calidad por etapa.',
+    image:
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    title: '3) Cerramientos y Sistemas',
+    text:
+      'Ejecución de fachadas, interiores y sistemas MEP coordinados; compatibilización técnica y pruebas de funcionamiento.',
+    image:
+      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    title: '4) Entrega y Cierre',
+    text:
+      'Acabados finales, comisionamiento, documentación as-built y manuales. Plan de operación y garantías.',
+    image:
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop',
+  },
+];
+
+export const MetodologiaGestion = () => {
+  const [active, setActive] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="metodologia-title">
+      <div className="container">
+        <h2 id="metodologia-title" className={styles.title}>
+          Metodología de Gestión de Proyectos
+        </h2>
+        <p className={styles.subtitle}>
+          Ciclo de vida corporativo con control de costos, tiempos y calidad.
+        </p>
+
+        <div className={styles.layout}>
+          <nav className={styles.nav} aria-label="Fases de metodología">
+            {steps.map((s, i) => (
+              <button
+                key={s.title}
+                type="button"
+                className={`${styles.stepBtn} ${active === i ? styles.active : ''}`}
+                onClick={() => setActive(i)}
+                aria-current={active === i ? 'step' : undefined}
+              >
+                {s.title}
+              </button>
+            ))}
+          </nav>
+
+          <main className={styles.panel}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
+                animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
+                exit={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.35 }}
+              >
+                <h3 className={styles.stepTitle}>{steps[active].title}</h3>
+                <p className={styles.stepText}>{steps[active].text}</p>
+                <div className={styles.imageWrap}>
+                  <img
+                    src={steps[active].image}
+                    alt={steps[active].title}
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\corporativos\PortafolioSoluciones.jsx`
+
+```
+// src/components/corporativos/PortafolioSoluciones.jsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import styles from './PortafolioSoluciones.module.scss';
+
+const tabs = [
+  {
+    id: 'oficinas',
+    label: 'Oficinas Corporativas',
+    title: 'Espacios de trabajo modernos y eficientes',
+    text:
+      'Estructuras y sistemas que favorecen plantas abiertas, núcleos eficientes, acústica y confort ambiental con consumos optimizados.',
+    bullets: [
+      'Coordinación integral MEP, IT y sistemas de seguridad.',
+      'Fachadas de alto desempeño térmico/acústico.',
+      'Core & Shell y Fit-Out con control de calidad documentado.',
+    ],
+    image: '/edificio_corporativo_1.jpg',
+  },
+  {
+    id: 'retail',
+    label: 'Plazas Comerciales (Retail)',
+    title: 'Experiencia del visitante y durabilidad',
+    text:
+      'Soluciones para grandes claros, circulaciones, cubiertas y acabados de alto tráfico con mantenimiento contenido.',
+    bullets: [
+      'Planeación de anclas y locales con accesos y andenes.',
+      'Sistemas contra incendio, evacuación y señalética.',
+      'Acabados y paisajismo resilientes al uso intensivo.',
+    ],
+    image: '/plaza_comercial_1.jpg',
+  },
+  {
+    id: 'mixto',
+    label: 'Proyectos de Uso Mixto',
+    title: 'Integración de residencial, comercial y oficinas',
+    text:
+      'Interfaz técnica y constructiva entre usos con zonificación, aislación acústica y logística de obra secuenciada.',
+    bullets: [
+      'Gestión de interferencias y fases por torre/volumen.',
+      'Sistemas híbridos (acero + concreto) según programa.',
+      'Coordinación de accesos, estacionamientos y servicios.',
+    ],
+    image: '/uso_mixto_1.jpg',
+  },
+];
+
+export const PortafolioSoluciones = () => {
+  const [active, setActive] = useState(tabs[0].id);
+  const prefersReducedMotion = useReducedMotion();
+  const current = tabs.find((t) => t.id === active);
+
+  return (
+    <section className={styles.section} aria-labelledby="portafolio-title">
+      <div className="container">
+        <h2 id="portafolio-title" className={styles.title}>
+          Portafolio de Soluciones
+        </h2>
+
+        <div className={styles.tabs} role="tablist" aria-label="Tipos de proyectos">
+          {tabs.map((tb) => (
+            <button
+              key={tb.id}
+              className={`${styles.tab} ${active === tb.id ? styles.active : ''}`}
+              onClick={() => setActive(tb.id)}
+              role="tab"
+              aria-selected={active === tb.id}
+              aria-controls={`panel-${tb.id}`}
+              id={`tab-${tb.id}`}
+              type="button"
+            >
+              {tb.label}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.contentWrap}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              className={styles.content}
+              role="tabpanel"
+              id={`panel-${current.id}`}
+              aria-labelledby={`tab-${current.id}`}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+              animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? {} : { opacity: 0, y: -12 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className={styles.textCol}>
+                <h3 className={styles.heading}>{current.title}</h3>
+                <p className={styles.paragraph}>{current.text}</p>
+                <ul className={styles.list}>
+                  {current.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={styles.imageCol}>
+                <img
+                  src={current.image}
+                  alt={current.title}
+                  loading="lazy"
+                  className={styles.image}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\corporativos\ValuePropositionCorporativos.jsx`
+
+```
+// src/components/corporativos/ValuePropositionCorporativos.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { FaGem, FaClipboardList, FaShieldAlt } from 'react-icons/fa'; // <-- Íconos!
+import styles from './ValuePropositionCorporativos.module.scss';
+
+// Contenido mejorado con iconos
+const items = [
+  {
+    icon: <FaGem />,
+    title: 'Ingeniería de Valor',
+    text: 'Optimizamos diseños y procesos para reducir costos y plazos, maximizando el retorno de su inversión sin sacrificar la calidad arquitectónica.',
+  },
+  {
+    icon: <FaClipboardList />,
+    title: 'Gestión Integral de Proyectos',
+    text: 'Actuamos como su único punto de contacto, garantizando una ejecución transparente y coordinada desde la pre-construcción hasta la entrega final.',
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: 'Calidad Estructural Garantizada',
+    text: 'Aplicamos 20 años de experiencia en acero, concreto y sistemas híbridos para asegurar la longevidad y seguridad de su edificación.',
+  },
+];
+
+export const ValuePropositionCorporativos = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="corp-value-title">
+      <div className="container">
+        <motion.h2
+          id="corp-value-title"
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+        >
+          Un proyecto ambicioso requiere un socio constructor a la altura
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {items.map((item, index) => (
+            <motion.article
+              key={item.title}
+              className={styles.card}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <div className={styles.cardIcon}>{item.icon}</div>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardText}>{item.text}</p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 ```
 
 ---
@@ -2940,6 +3478,934 @@ export const Navbar = () => {
 
 ---
 
+## Archivo: `src\components\naves\CTAConsultation.jsx`
+
+```
+// src/components/naves/CTAConsultation.jsx
+import React from 'react';
+import styles from './CTAConsultation.module.scss';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+
+export const CTAConsultation = () => {
+  return (
+    <section className={styles.section} aria-labelledby="cta-naves-title">
+      <div className="container">
+        <h2 id="cta-naves-title" className={styles.title}>
+          Hable con un ingeniero de naves industriales
+        </h2>
+        <p className={styles.subtitle}>
+          Compártenos layout, altura libre, claros requeridos y cronograma. Respondemos
+          en menos de 24 horas.
+        </p>
+
+        <div id="form" className={styles.formWrap}>
+          <ContactFormBlock
+            title="Solicitud de análisis y cotización"
+            subtitle="Indique ubicación del proyecto, m² estimados, alturas, claros y plazo de entrega."
+            agreementText='Acepto el <a href="/politica-privacidad">Aviso de Privacidad</a>.'
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\naves\GaleriaNaves.jsx`
+
+```
+// src/components/naves/GaleriaNaves.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import styles from './GaleriaNaves.module.scss';
+
+const items = [
+  { title: 'Nave logística — Monterrey', image: '/estructura_metalica_1.jpg' },
+  { title: 'CEDIS — Bajío', image: '/estructura_metalica_trabajando_1.jpg' },
+  { title: 'Bodega — CDMX', image: '/estructura_metalica_vigas_1.jpg' },
+  { title: 'Manufactura — Querétaro', image: '/estructura_metalica_edificio_1.png' },
+];
+
+export const GaleriaNaves = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="galeria-naves-title">
+      <div className="container">
+        <motion.h2
+          id="galeria-naves-title"
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
+        >
+          Proyectos que Validan la Ejecución
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {items.map((it) => (
+            <article key={it.title} className={styles.card}>
+              <img
+                src={it.image}
+                alt={it.title}
+                loading="lazy"
+                className={styles.image}
+              />
+              <div className={styles.caption}>{it.title}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\naves\NavesCTA.jsx`
+
+```
+// src/components/naves/NavesCTA.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaCheckCircle } from 'react-icons/fa';
+import styles from './NavesCTA.module.scss';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+
+const benefits = [
+  'Análisis técnico preliminar sin costo.',
+  'Ingeniería de valor para optimizar su inversión.',
+  'Ejecución garantizada en tiempo y presupuesto.',
+];
+
+export const NavesCTA = () => {
+  return (
+    <section id="form" className={styles.ctaSection} aria-labelledby="cta-naves-title">
+      <div className={`container ${styles.ctaGrid}`}>
+        {/* Columna Izquierda: Propuesta de Valor */}
+        <motion.div 
+          className={styles.valueColumn}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 id="cta-naves-title">Listo para Iniciar su Próximo Proyecto Industrial?</h2>
+          <p>
+            Nuestro equipo está preparado para transformar sus requerimientos en una estructura funcional y rentable.
+            Hable con un experto y obtenga:
+          </p>
+          <ul className={styles.benefitsList}>
+            {benefits.map((benefit, index) => (
+              <li key={index}>
+                <FaCheckCircle className={styles.benefitIcon} />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* Columna Derecha: Formulario */}
+        <motion.div
+          className={styles.formColumn}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <ContactFormBlock
+            title="Solicite su Análisis y Cotización"
+            subtitle="Compártenos tu layout, m², ubicación y cronograma."
+            agreementText='Acepto el <a href="/politica-privacidad" target="_blank">Aviso de Privacidad</a>.'
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\naves\NavesHeader.jsx`
+
+```
+// src/components/naves/NavesHeader.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import styles from './NavesHeader.module.scss';
+import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+
+const TrackedLink = withConversionTracking('a');
+
+export const NavesHeader = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <header className={styles.header} aria-label="Soluciones en Naves Industriales">
+      <div className={styles.mediaWrap} aria-hidden="true">
+        <video
+          className={styles.bgVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/nave_hero_poster.jpg"
+        >
+          <source src="/timelapse_nave.mp4" type="video/mp4" />
+        </video>
+        <div className={styles.overlay} />
+      </div>
+
+      <div className={`container ${styles.inner}`}>
+        <motion.h1
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+          animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }} 
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+        >
+          Soluciones en Naves Industriales para Operaciones que No se Detienen
+        </motion.h1>
+
+        <motion.p
+          className={styles.subtitle}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+        >
+          Mitigamos riesgo de <strong>tiempo</strong>, <strong>presupuesto</strong> y{' '}
+          <strong>seguridad</strong> con ingeniería, habilitado en planta y montaje acelerado.
+        </motion.p>
+
+        <motion.div
+          initial={prefersReducedMotion ? {} : { opacity: 0 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <TrackedLink
+            href="#form"
+            className={styles.cta}
+            conversionType="Solicitud_Naves_Hero"
+          >
+            Solicitar análisis y cotización
+          </TrackedLink>
+        </motion.div>
+      </div>
+    </header>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\naves\ProcesoNaves.jsx`
+
+```
+// src/components/naves/ProcesoNaves.jsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import styles from './ProcesoNaves.module.scss';
+
+const steps = [
+  {
+    title: '1) Diseño y Cálculo',
+    text:
+      'Ingeniería de detalle, modelos, memorias de cálculo, compatibilización arquitectura/MEP, criterios IMCA y firma de DRO.',
+    image:
+      'https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    title: '2) Habilitado en Planta',
+    text:
+      'Prefabricación, etiquetado y QA/QC de piezas para ensamblaje preciso y reducción de tiempos en sitio.',
+    image:
+      'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    title: '3) Cimentación',
+    text:
+      'Coordinación con obra civil, anclas/plantillas y liberación por control de calidad para recibir estructura metálica.',
+    image: '/estructura-para-techo.jpg',
+  },
+  {
+    title: '4) Montaje',
+    text:
+      'Logística JIT, maniobras seguras en altura y cumplimiento estricto del cronograma maestro.',
+    image: '/estructura_metalica_trabajando_2.jpg',
+  },
+  {
+    title: '5) Acabados y Entrega',
+    text:
+      'Protecciones, recubrimientos, pruebas y documentación final para operación estable y de bajo mantenimiento (TCO).',
+    image: '/estructura_metalica_edificio_1.png',
+  },
+];
+
+export const ProcesoNaves = () => {
+  const [active, setActive] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="proceso-naves-title">
+      <div className="container">
+        <h2 id="proceso-naves-title" className={styles.title}>
+          Nuestro Proceso Constructivo
+        </h2>
+        <p className={styles.subtitle}>
+          Transparencia y control en cada fase para eliminar sorpresas.
+        </p>
+
+        <div className={styles.layout}>
+          <nav className={styles.nav} aria-label="Fases del proceso">
+            {steps.map((s, i) => (
+              <button
+                key={s.title}
+                type="button"
+                className={`${styles.stepBtn} ${active === i ? styles.active : ''}`}
+                onClick={() => setActive(i)}
+                aria-current={active === i ? 'step' : undefined}
+              >
+                {s.title}
+              </button>
+            ))}
+          </nav>
+
+          <main className={styles.panel}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
+                animate={prefersReducedMotion ? {} : { opacity: 1, x: 0 }}
+                exit={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.35 }}
+              >
+                <h3 className={styles.stepTitle}>{steps[active].title}</h3>
+                <p className={styles.stepText}>{steps[active].text}</p>
+                <div className={styles.imageWrap}>
+                  <img
+                    src={steps[active].image}
+                    alt={steps[active].title}
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\naves\TiposNaves.jsx`
+
+```
+// src/components/naves/TiposNaves.jsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import styles from './TiposNaves.module.scss';
+
+const tabs = [
+  {
+    id: 'acero',
+    label: 'Estructuras de Acero',
+    title: 'Máxima flexibilidad y grandes claros',
+    text:
+      'Soluciones en acero para luces amplias, crecimiento modular, techos insulados y preparación para equipos (sistemas contra incendio, ductería, puentes grúa).',
+    image: '/estructura_metalica_1.jpg',
+  },
+  {
+    id: 'tilt',
+    label: 'Muros Tilt-Up',
+    title: 'Rapidez y durabilidad',
+    text:
+      'Paneles tilt-up para envolventes robustas, control térmico/acústico y ciclos de obra civil optimizados.',
+    image: '/estructura_metalica_vigas_1.jpg',
+  },
+  {
+    id: 'hibridos',
+    label: 'Sistemas Híbridos',
+    title: 'Lo mejor de ambos mundos',
+    text:
+      'Combina acero y tilt-up para velocidad de entrega y flexibilidad estructural con TCO competitivo.',
+    image: '/estructura_metalica_edificio_1.png',
+  },
+];
+
+export const TiposNaves = () => {
+  const [active, setActive] = useState(tabs[0].id);
+  const prefersReducedMotion = useReducedMotion();
+  const current = tabs.find((t) => t.id === active);
+
+  return (
+    <section className={styles.section} aria-labelledby="tipos-naves-title">
+      <div className="container">
+        <h2 id="tipos-naves-title" className={styles.title}>
+          Tipos de Naves Industriales
+        </h2>
+
+        <div
+          className={styles.tabs}
+          role="tablist"
+          aria-label="Selección de tipo de nave"
+        >
+          {tabs.map((tb) => (
+            <button
+              key={tb.id}
+              className={`${styles.tab} ${active === tb.id ? styles.active : ''}`}
+              onClick={() => setActive(tb.id)}
+              role="tab"
+              aria-selected={active === tb.id}
+              aria-controls={`panel-${tb.id}`}
+              id={`tab-${tb.id}`}
+              type="button"
+            >
+              {tb.label}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.contentWrap}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              className={styles.content}
+              role="tabpanel"
+              id={`panel-${current.id}`}
+              aria-labelledby={`tab-${current.id}`}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+              animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? {} : { opacity: 0, y: -12 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className={styles.textCol}>
+                <h3 className={styles.heading}>{current.title}</h3>
+                <p className={styles.paragraph}>{current.text}</p>
+                <ul className={styles.list}>
+                  <li>Memorias de cálculo y detalles de conexión.</li>
+                  <li>Coordinación MEP y andenes/diques.</li>
+                  <li>Preparación para certificaciones (FM Global, NFPA, etc.).</li>
+                </ul>
+              </div>
+
+              <div className={styles.imageCol}>
+                <img
+                  src={current.image}
+                  alt={current.title}
+                  loading="lazy"
+                  className={styles.image}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\naves\ValuePropositionNaves.jsx`
+
+```
+// src/components/naves/ValuePropositionNaves.jsx
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import styles from './ValuePropositionNaves.module.scss';
+
+const items = [
+  {
+    title: 'Optimización de Espacio (Grandes Claros)',
+    text:
+      'Estructuras de acero con claros máximos para flujo de materiales y layouts flexibles — ideal para CEDIS y manufactura.',
+  },
+  {
+    title: 'Rapidez de Construcción',
+    text:
+      'Habilitado en planta + logística JIT minimizan tiempo en sitio y riesgos de clima y obra civil.',
+  },
+  {
+    title: 'Retorno de Inversión y TCO',
+    text:
+      'Ingeniería certificada IMCA, firma de DRO y durabilidad que reducen re-trabajos, paros y mantenimiento a lo largo del ciclo de vida.',
+  },
+];
+
+export const ValuePropositionNaves = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className={styles.section} aria-labelledby="naves-value-title">
+      <div className="container">
+        <motion.h2
+          id="naves-value-title"
+          className={styles.title}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+          whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.45 }}
+        >
+          El éxito de tu operación depende de una infraestructura eficiente y confiable
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {items.map((i) => (
+            <motion.article
+              key={i.title}
+              className={styles.card}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
+              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.4 }}
+            >
+              <h3 className={styles.cardTitle}>{i.title}</h3>
+              <p className={styles.cardText}>{i.text}</p>
+            </motion.article>
+          ))}
+        </div>
+
+        <ul className={styles.bullets}>
+          <li>
+            <strong>Velocidad y precisión:</strong> montaje acelerado gracias a
+            prefabricado/habilitado en planta.
+          </li>
+          <li>
+            <strong>Flexibilidad estructural:</strong> grandes claros, alturas libres y
+            preparación para racks/sprinklers.
+          </li>
+          <li>
+            <strong>Certeza y normatividad:</strong> IMCA, firma de DRO, memoria de
+            cálculo y QA/QC documentado.
+          </li>
+          <li>
+            <strong>Experiencia comprobada:</strong> 20 años de ejecución sin
+            sorpresas.
+          </li>
+        </ul>
+      </div>
+    </section>
+  );
+};
+
+```
+
+---
+
+## Archivo: `src\components\nocturnos\GaleriaNocturnos.jsx`
+
+```
+// src/components/nocturnos/GaleriaNocturnos.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import styles from './GaleriaNocturnos.module.scss';
+
+const projects = [
+  { title: 'Bar de Autor - Polanco, CDMX', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200&auto=format&fit=crop' },
+  { title: 'Club Nocturno - Monterrey', image: 'https://images.unsplash.com/photo-1578736649624-1283a0050853?q=80&w=1200&auto=format&fit=crop' },
+  { title: 'Lounge & Terraza - Tulum', image: 'https://images.unsplash.com/photo-1571268684239-3d91de25b593?q=80&w=1200&auto=format&fit=crop' },
+  { title: 'Remodelación de Antro - Guadalajara', image: 'https://images.unsplash.com/photo-1598488581381-20a2e5d710b0?q=80&w=1200&auto=format&fit=crop' },
+];
+
+export const GaleriaNocturnos = () => {
+  return (
+    <section className={styles.section} aria-labelledby="galeria-nocturnos-title">
+      <div className="container">
+        <motion.h2
+          id="galeria-nocturnos-title"
+          className={styles.title}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          Proyectos que Marcan la Noche
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {projects.map((project, index) => (
+            <motion.article 
+              key={index} 
+              className={styles.card}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                className={styles.image}
+              />
+              <div className={styles.overlay}>
+                <h3 className={styles.caption}>{project.title}</h3>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\nocturnos\MetodologiaNocturnos.jsx`
+
+```
+// src/components/nocturnos/MetodologiaNocturnos.jsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaLightbulb, FaFileContract, FaHammer, FaPlug } from 'react-icons/fa';
+import styles from './MetodologiaNocturnos.module.scss';
+
+const steps = [
+  {
+    icon: <FaLightbulb />,
+    title: '1. Conceptualización y Diseño',
+    text: 'Colaboramos con tus arquitectos y diseñadores para traducir la visión creativa en planos constructivos viables, optimizando flujos, acústica y puntos de experiencia.',
+    image: 'https://images.unsplash.com/photo-1578662996442-af74a86e3a83?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    icon: <FaFileContract />,
+    title: '2. Ingeniería y Permisos',
+    text: 'Realizamos la ingeniería de detalle, cálculos estructurales y gestionamos los permisos específicos de uso de suelo, protección civil y normativas de sonido.',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    icon: <FaHammer />,
+    title: '3. Construcción y Acabados',
+    text: 'Ejecutamos la obra con un enfoque en la calidad de los acabados, la durabilidad de los materiales y el cumplimiento estricto del cronograma para acelerar tu apertura.',
+    image: 'https://images.unsplash.com/photo-1599691880946-f9435b6a38a7?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    icon: <FaPlug />,
+    title: '4. Integración Tecnológica',
+    text: 'Coordinamos la instalación de sistemas de audio, video, iluminación, seguridad y puntos de venta, asegurando una infraestructura tecnológica impecable y lista para operar.',
+    image: 'https://images.unsplash.com/photo-1516956907223-3f43b35435ed?q=80&w=1200&auto=format&fit=crop',
+  },
+];
+
+export const MetodologiaNocturnos = () => {
+  const [active, setActive] = useState(0);
+
+  return (
+    <section className={styles.section} aria-labelledby="metodologia-title">
+      <div className="container">
+        <motion.h2
+          id="metodologia-title"
+          className={styles.title}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          Nuestra Metodología: Del Concepto a la Gran Apertura
+        </motion.h2>
+        
+        <div className={styles.layout}>
+          <nav className={styles.nav} aria-label="Fases de metodología">
+            {steps.map((s, i) => (
+              <button
+                key={s.title}
+                type="button"
+                className={`${styles.stepBtn} ${active === i ? styles.active : ''}`}
+                onClick={() => setActive(i)}
+                aria-current={active === i ? 'step' : undefined}
+              >
+                <span className={styles.btnIcon}>{s.icon}</span>
+                <span className={styles.btnText}>{s.title.substring(3)}</span>
+              </button>
+            ))}
+          </nav>
+
+          <main className={styles.panel}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <h3 className={styles.stepTitle}>{steps[active].title}</h3>
+                <p className={styles.stepText}>{steps[active].text}</p>
+                <div className={styles.imageWrap}>
+                  <img
+                    src={steps[active].image}
+                    alt={steps[active].title}
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\nocturnos\NocturnosCTA.jsx`
+
+```
+// src/components/nocturnos/NocturnosCTA.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaUserTie, FaFileSignature, FaRocket } from 'react-icons/fa';
+import styles from './NocturnosCTA.module.scss';
+import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+
+const benefits = [
+  { icon: <FaUserTie />, text: 'Asesoría con un experto en tu proyecto.' },
+//   { icon: <FaFileSignature />, text: 'Análisis de viabilidad y normatividad sin costo.' },
+  { icon: <FaRocket />, text: 'Estimación de cronograma para una apertura acelerada.' },
+];
+
+export const NocturnosCTA = () => {
+  return (
+    <section id="form" className={styles.ctaSection} aria-labelledby="cta-nocturnos-title">
+      <div className={`container ${styles.ctaGrid}`}>
+        <motion.div 
+          className={styles.valueColumn}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 id="cta-nocturnos-title">Tu Visión. Nuestra Ejecución. Noches Legendarias.</h2>
+          <p>
+            Transformamos conceptos audaces en los destinos nocturnos más icónicos y rentables.
+            Contáctanos y demos el primer paso:
+          </p>
+          <ul className={styles.benefitsList}>
+            {benefits.map((benefit, index) => (
+              <li key={index}>
+                <div className={styles.benefitIcon}>{benefit.icon}</div>
+                <span>{benefit.text}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div
+          className={styles.formColumn}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <ContactFormBlock
+            title="Inicia tu Proyecto"
+            subtitle="Indícanos el concepto, m², ubicación y fecha de apertura deseada."
+            agreementText='Acepto el <a href="/politica-privacidad" target="_blank">Aviso de Privacidad</a>.'
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\nocturnos\NocturnosHeader.jsx`
+
+```
+// src/components/nocturnos/NocturnosHeader.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import styles from './NocturnosHeader.module.scss';
+import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+
+const TrackedLink = withConversionTracking('a');
+
+export const NocturnosHeader = () => {
+  return (
+    <header className={styles.header}>
+      <div className={styles.mediaWrap}>
+        <video
+          className={styles.bgVideo}
+          autoPlay loop muted playsInline
+          poster="/path/to/poster_nocturno.jpg" // Cambia por un poster real
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-a-blurry-shot-of-a-dj-at-a-party-4261-large.mp4" type="video/mp4" />
+        </video>
+        <div className={styles.overlay} />
+      </div>
+
+      <div className={`container ${styles.inner}`}>
+        <motion.h1
+          className={styles.title}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          Construimos Escenarios para Noches Inolvidables
+        </motion.h1>
+
+        <motion.p
+          className={styles.subtitle}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+        >
+          Fusionamos ingeniería de precisión con diseño de vanguardia para materializar bares, antros y centros nocturnos que cautivan, perduran y cumplen con toda la normativa.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <TrackedLink
+            href="#form"
+            className={styles.cta}
+            conversionType="Solicitud_Nocturnos_Hero"
+          >
+            Iniciar Mi Proyecto
+          </TrackedLink>
+        </motion.div>
+      </div>
+    </header>
+  );
+};
+```
+
+---
+
+## Archivo: `src\components\nocturnos\ServiciosEspecializados.jsx`
+
+```
+// src/components/nocturnos/ServiciosEspecializados.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaVolumeUp, FaBolt, FaGlassCheers, FaFileContract } from 'react-icons/fa';
+import styles from './ServiciosEspecializados.module.scss';
+
+const services = [
+    { icon: <FaVolumeUp/>, title: "Ingeniería Acústica", text: "Diseño y construcción de sistemas de aislamiento y acondicionamiento acústico para un sonido impecable y cumplimiento de normativas." },
+    { icon: <FaBolt/>, title: "Iluminación y FX", text: "Integramos la infraestructura para sistemas de iluminación escénica, video y efectos especiales desde la fase estructural." },
+    { icon: <FaGlassCheers/>, title: "Barras y Mobiliario", text: "Fabricación a medida de barras, booths y elementos fijos de alta durabilidad y diseño, listos para la operación intensiva." },
+    { icon: <FaFileContract/>, title: "Gestión de Permisos", text: "Nos encargamos de la complejidad de los permisos de construcción, uso de suelo y protección civil específicos para este giro." }
+];
+
+export const ServiciosEspecializados = () => {
+    return (
+        <section className={styles.section}>
+            <div className="container">
+                <motion.h2
+                    className={styles.title}
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                >
+                    Capacidades que Marcan la Diferencia
+                </motion.h2>
+                <div className={styles.grid}>
+                    {services.map((service, index) => (
+                        <motion.div
+                            key={index}
+                            className={styles.card}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <div className={styles.cardIcon}>{service.icon}</div>
+                            <h3 className={styles.cardTitle}>{service.title}</h3>
+                            <p className={styles.cardText}>{service.text}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+```
+
+---
+
+## Archivo: `src\components\nocturnos\ValuePropositionNocturnos.jsx`
+
+```
+// src/components/nocturnos/ValuePropositionNocturnos.jsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaTheaterMasks, FaClock, FaShieldAlt } from 'react-icons/fa';
+import styles from './ValuePropositionNocturnos.module.scss';
+
+const items = [
+  {
+    icon: <FaTheaterMasks />,
+    title: 'Diseño que Cautiva',
+    text: 'Traducimos la visión de arquitectos y diseñadores en espacios funcionales con acabados, iluminación y acústica que crean atmósferas únicas.',
+  },
+  {
+    icon: <FaClock />,
+    title: 'Construcción Acelerada',
+    text: 'Entendemos el costo de oportunidad. Nuestro proceso optimizado y la pre-fabricación aseguran una apertura en tiempo récord.',
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: 'Durabilidad a Toda Prueba',
+    text: 'Construimos para el alto tráfico. Seleccionamos materiales y aplicamos técnicas que garantizan la longevidad de su inversión, reduciendo el mantenimiento.',
+  },
+];
+
+export const ValuePropositionNocturnos = () => {
+  return (
+    <section className={styles.section}>
+      <div className="container">
+        <motion.h2
+          className={styles.title}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+        >
+          La Experiencia lo es Todo. La Construcción la Hace Posible.
+        </motion.h2>
+
+        <div className={styles.grid}>
+          {items.map((item, index) => (
+            <motion.div
+              key={item.title}
+              className={styles.card}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+            >
+              <div className={styles.cardIcon}>{item.icon}</div>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardText}>{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+---
+
 ## Archivo: `src\components\projects\ProjectsGrid.jsx`
 
 ```
@@ -3692,6 +5158,45 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ---
 
+## Archivo: `src\pages\CentrosNocturnosPage.jsx`
+
+```
+// src/pages/CentrosNocturnosPage.jsx
+import React from 'react';
+import { Helmet } from 'react-helmet-next';
+
+// --- Importar los nuevos componentes especializados ---
+import { NocturnosHeader } from '../components/nocturnos/NocturnosHeader.jsx';
+import { ValuePropositionNocturnos } from '../components/nocturnos/ValuePropositionNocturnos.jsx';
+import { ServiciosEspecializados } from '../components/nocturnos/ServiciosEspecializados.jsx';
+import { MetodologiaNocturnos } from '../components/nocturnos/MetodologiaNocturnos.jsx';
+import { GaleriaNocturnos } from '../components/nocturnos/GaleriaNocturnos.jsx';
+import { NocturnosCTA } from '../components/nocturnos/NocturnosCTA.jsx';
+
+export const CentrosNocturnosPage = () => {
+  return (
+    <>
+      <Helmet>
+        <title>Construcción de Bares y Centros Nocturnos | Grupo Alfa 74</title>
+        <meta name="description" content="Especialistas en la construcción y remodelación de bares, antros y centros nocturnos. Integramos diseño, acústica, iluminación y construcción para crear experiencias inolvidables." />
+        <meta name="keywords" content="construcción de bares, construcción de antros, remodelación de centros nocturnos, ingeniería acústica, diseño de iluminación para bares" />
+      </Helmet>
+
+      <NocturnosHeader />
+      <ValuePropositionNocturnos />
+      <ServiciosEspecializados />
+      <MetodologiaNocturnos />
+      <GaleriaNocturnos />
+      <NocturnosCTA />
+    </>
+  );
+};
+
+export default CentrosNocturnosPage;
+```
+
+---
+
 ## Archivo: `src\pages\ContactPage.jsx`
 
 ```
@@ -3705,7 +5210,7 @@ import { Link } from 'react-router-dom';
 // Componentes reutilizables que usarás
 import { TechnicalFAQs } from '../components/services/TechnicalFAQs.jsx';
 import { CTAConsultation } from '../components/services/CTAConsultation.jsx'; 
-import ContactFormBlock from '../components/contact/contactFormBlock.jsx'; 
+import ContactFormBlock from '../components/contact/ContactFormBlock.jsx'; 
 
 // --- Datos Estáticos para la Página de Contacto con URLs de Mapas Reales ---
 const locationsData = [
@@ -3883,6 +5388,38 @@ export default ContactPage;
 
 ---
 
+## Archivo: `src\pages\EdificiosCorporativosPage.jsx`
+
+```
+// src/pages/EdificiosCorporativosPage.jsx
+import React from 'react';
+import { CorporativosHeader } from '../components/corporativos/CorporativosHeader.jsx';
+import { ValuePropositionCorporativos } from '../components/corporativos/ValuePropositionCorporativos.jsx';
+import { PortafolioSoluciones } from '../components/corporativos/PortafolioSoluciones.jsx';
+import { MetodologiaGestion } from '../components/corporativos/MetodologiaGestion.jsx';
+import { GaleriaCorporativos } from '../components/corporativos/GaleriaCorporativos.jsx';
+// --- ¡CAMBIO AQUÍ! Importamos el nuevo CTA ---
+import { CorporativosCTA } from '../components/corporativos/CorporativosCTA.jsx';
+
+export const EdificiosCorporativosPage = () => {
+  return (
+    <>
+      <CorporativosHeader />
+      <ValuePropositionCorporativos />
+      <PortafolioSoluciones />
+      <MetodologiaGestion />
+      <GaleriaCorporativos />
+      {/* --- ¡Y lo usamos aquí! --- */}
+      <CorporativosCTA />
+    </>
+  );
+};
+
+export default EdificiosCorporativosPage;
+```
+
+---
+
 ## Archivo: `src\pages\EspectacularesPage.jsx`
 
 ```
@@ -3968,7 +5505,7 @@ export function HomePage() {
       <TrustBar />
       <ServicesOverview />
       <ValueProposition />
-      <WorkProcess /> 
+      <WorkProcess />
       <ProjectsHighlight />
       <Testimonials />
       <ClientLogoBar />
@@ -3977,6 +5514,37 @@ export function HomePage() {
     </>
   );
 }
+```
+
+---
+
+## Archivo: `src\pages\NavesIndustrialesPage.jsx`
+
+```
+// src/pages/NavesIndustrialesPage.jsx
+import React from 'react';
+import { NavesHeader } from '../components/naves/NavesHeader.jsx';
+import { ValuePropositionNaves } from '../components/naves/ValuePropositionNaves.jsx';
+import { TiposNaves } from '../components/naves/TiposNaves.jsx';
+import { ProcesoNaves } from '../components/naves/ProcesoNaves.jsx';
+import { GaleriaNaves } from '../components/naves/GaleriaNaves.jsx';
+import { NavesCTA } from '../components/naves/NavesCTA.jsx';
+
+export const NavesIndustrialesPage = () => {
+  return (
+    <>
+      <NavesHeader />
+      <ValuePropositionNaves />
+      <TiposNaves />
+      <ProcesoNaves />
+      <GaleriaNaves />
+      <NavesCTA />
+    </>
+  );
+};
+
+export default NavesIndustrialesPage;
+
 ```
 
 ---
