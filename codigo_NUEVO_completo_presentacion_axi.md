@@ -1325,7 +1325,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Chart from 'chart.js/auto';
 // npm install chart.js
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 import styles from './ConversionAnalytics.module.scss';
 
 // --- Iconos ---
@@ -2045,7 +2045,7 @@ export const CorporativosCTA = () => {
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import styles from './CorporativosHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 const TrackedLink = withConversionTracking('a');
 
@@ -2463,7 +2463,7 @@ export const ValuePropositionCorporativos = () => {
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './EspectacularesHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx'; // Importa el HOC para el seguimiento
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx'; // Importa el HOC para el seguimiento
 
 const TrackedCTA = withConversionTracking('a');
 
@@ -3194,7 +3194,7 @@ import { motion } from 'framer-motion';
 import styles from './HeroSection.module.scss';
 
 // --- Importa el HOC para el seguimiento ---
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 // --- Crea versiones "rastreables" de tus elementos clicables ---
 const TrackedPrimaryCTA = withConversionTracking('a');
@@ -3759,7 +3759,7 @@ export const ValueProposition = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaClipboardList, FaDraftingCompass, FaCogs, FaHardHat } from 'react-icons/fa';
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 import styles from './WorkProcess.module.scss';
 
 const processSteps = [
@@ -4121,7 +4121,7 @@ export const NavesCTA = () => {
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import styles from './NavesHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 const TrackedLink = withConversionTracking('a');
 
@@ -4713,7 +4713,7 @@ export const NocturnosCTA = () => {
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './NocturnosHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 const TrackedLink = withConversionTracking('a');
 
@@ -5573,7 +5573,7 @@ export const ConversionProvider = ({ children }) => {
 
 ```jsx
 import React from 'react';
-import { useConversion } from '/src/hooks/useConversion.jsx';
+import { useConversion } from "@/hooks/useConversion.jsx";
 
 /**
  * Un Componente de Orden Superior (HOC) que envuelve un componente (ej. un botón o enlace)
@@ -5609,8 +5609,8 @@ export const withConversionTracking = (WrappedComponent) => {
 
 ## Archivo: `src\hooks\useConversion.jsx`
 
-```javascript
-import React, { createContext, useState, useCallback } from 'react';
+```jsx
+import React, { createContext, useState, useCallback, useContext } from 'react'; // <-- Asegúrate que useContext esté aquí
 
 // 1. Crear el Contexto
 export const ConversionContext = createContext(null);
@@ -5619,12 +5619,8 @@ export const ConversionContext = createContext(null);
 export const ConversionProvider = ({ children }) => {
   const [conversions, setConversions] = useState([]);
 
-  // Función para registrar un nuevo evento de conversión
   const logConversion = useCallback((type) => {
-    // Simulamos el envío de datos a Google Ads (gtag)
-    console.log(`%c[Google Ads Simulation] Evento de Conversión Registrado:
-- Tipo: ${type}
-- Timestamp: ${new Date().toISOString()}`, 'color: #9CCC3C; font-weight: bold;');
+    console.log(`%c[Google Ads Simulation]...`, 'color: #9CCC3C;');
 
     const newConversion = {
       type,
@@ -5647,6 +5643,14 @@ export const ConversionProvider = ({ children }) => {
   );
 };
 
+// 3. Crear y Exportar el Hook Personalizado (ESTA ES LA PARTE CLAVE)
+export const useConversion = () => {
+  const context = useContext(ConversionContext);
+  if (!context) {
+    throw new Error('useConversion debe ser usado dentro de un ConversionProvider');
+  }
+  return context;
+};
 ```
 
 ---
@@ -5673,7 +5677,7 @@ import App from './App.jsx';
 import './assets/scss/main.scss'
 
 // --- 1. Importa el Proveedor del Contexto ---
-import { ConversionProvider } from './context/ConversionContext.jsx';
+import { ConversionProvider } from './hooks/useConversion.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import styles from './HeroSection.module.scss';
 
 // --- Importa el HOC para el seguimiento ---
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 // --- Crea versiones "rastreables" de tus elementos clicables ---
 const TrackedPrimaryCTA = withConversionTracking('a');

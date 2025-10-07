@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './NocturnosHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 const TrackedLink = withConversionTracking('a');
 

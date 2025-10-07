@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './EspectacularesHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx'; // Importa el HOC para el seguimiento
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx'; // Importa el HOC para el seguimiento
 
 const TrackedCTA = withConversionTracking('a');
 

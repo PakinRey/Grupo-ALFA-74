@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import styles from './CorporativosHeader.module.scss';
-import { withConversionTracking } from '../../hocs/withConversionTracking.jsx';
+import { withConversionTracking } from '@/hocs/withConversionTracking.jsx';
 
 const TrackedLink = withConversionTracking('a');
 
