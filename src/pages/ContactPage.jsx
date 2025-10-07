@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // Componentes reutilizables que usarás
 import { TechnicalFAQs } from '../components/services/TechnicalFAQs.jsx';
 import { CTAConsultation } from '../components/services/CTAConsultation.jsx'; 
-import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
+import ContactFormBlock from '../components/contact/ContactFormBlock.jsx';
 
 // --- Datos Estáticos para la Página de Contacto con URLs de Mapas Reales ---
 const locationsData = [

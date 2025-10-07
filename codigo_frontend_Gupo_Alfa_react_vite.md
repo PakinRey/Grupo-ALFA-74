@@ -1466,7 +1466,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaFileSignature, FaUserTie, FaChartLine } from 'react-icons/fa';
 import styles from './CorporativosCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
 
 const benefits = [
   { icon: <FaUserTie />, text: 'Asesoría directa con un líder de proyecto.' },
@@ -1588,42 +1588,6 @@ export const CorporativosHeader = () => {
         </motion.div>
       </div>
     </header>
-  );
-};
-
-```
-
----
-
-## Archivo: `src\components\corporativos\CTAConsultation.jsx`
-
-```
-// src/components/corporativos/CTAConsultation.jsx
-import React from 'react';
-import styles from './CTAConsultation.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
-
-export const CTAConsultation = () => {
-  return (
-    <section className={styles.section} aria-labelledby="cta-corp-title">
-      <div className="container">
-        <h2 id="cta-corp-title" className={styles.title}>
-          Conversemos sobre tu proyecto corporativo o comercial
-        </h2>
-        <p className={styles.subtitle}>
-          Cuéntanos programa arquitectónico, superficie, sistemas de fachada/MEP y
-          cronograma. Respondemos en menos de 24 horas.
-        </p>
-
-        <div id="form" className={styles.formWrap}>
-          <ContactFormBlock
-            title="Solicitud de asesoría y estimación"
-            subtitle="Indica ubicación, m² por uso, sistema estructural preferido y fecha objetivo de apertura."
-            agreementText='Acepto el <a href="/politica-privacidad">Aviso de Privacidad</a>.'
-          />
-        </div>
-      </div>
-    </section>
   );
 };
 
@@ -3576,7 +3540,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 import styles from './NavesCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
 
 const benefits = [
   'Análisis técnico preliminar sin costo.',
@@ -4170,7 +4134,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaUserTie, FaFileSignature, FaRocket } from 'react-icons/fa';
 import styles from './NocturnosCTA.module.scss';
-import ContactFormBlock from '../contact/ContactFormBlock.jsx';
+import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
 
 const benefits = [
   { icon: <FaUserTie />, text: 'Asesoría con un experto en tu proyecto.' },
@@ -5210,7 +5174,7 @@ import { Link } from 'react-router-dom';
 // Componentes reutilizables que usarás
 import { TechnicalFAQs } from '../components/services/TechnicalFAQs.jsx';
 import { CTAConsultation } from '../components/services/CTAConsultation.jsx'; 
-import ContactFormBlock from '../components/contact/ContactFormBlock.jsx'; 
+import ContactFormBlock from "@/components/contact/ContactFormBlock.jsx";
 
 // --- Datos Estáticos para la Página de Contacto con URLs de Mapas Reales ---
 const locationsData = [
